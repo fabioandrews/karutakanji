@@ -1,0 +1,518 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".TelaInicialMultiplayer" >
+<LinearLayout android:id="@+id/screen_sign_in" style="@style/LLScreen">
+        <TextView style="@style/GameTitle" />
+        <TextView style="@style/GameBlurb" />
+
+        <Button android:id="@+id/button_single_player"
+            style="@style/MainScreenButton"
+            android:text="@string/single_player" />
+        <com.google.android.gms.common.SignInButton android:id="@+id/button_sign_in"
+            style="@style/SignInButton" />
+    </LinearLayout>
+
+    <!-- MAIN SCREEN -->
+    <LinearLayout android:id="@+id/screen_main" style="@style/LLScreen">
+        <TextView style="@style/GameTitle" />
+        <Button android:id="@+id/button_quick_game"
+            style="@style/MainScreenButton"
+            android:text="@string/quick_game" />
+        <TextView style="@style/MainScreenButtonBlurb"
+            android:text="@string/quick_game_explanation" />
+        <Button android:id="@+id/button_invite_players"
+            style="@style/MainScreenButton"
+            android:text="@string/invite_players" />
+        <TextView style="@style/MainScreenButtonBlurb"
+            android:text="@string/invite_players_explanation" />
+        <Button android:id="@+id/button_see_invitations"
+            style="@style/MainScreenButton"
+            android:text="@string/see_invitations" />
+        <TextView style="@style/MainScreenButtonBlurb"
+            android:text="@string/see_invitations_explanation" />
+        <Button android:id="@+id/button_sign_out"
+            style="@style/SignOutButton"
+            android:text="@string/sign_out" />
+    </LinearLayout>
+
+    <!-- INVITATION POPUP -->
+    <LinearLayout android:id="@+id/invitation_popup" style="@style/InvPopup">
+        <TextView android:id="@+id/incoming_invitation_text" style="@style/InvPopupText" />
+        <Button android:id="@+id/button_accept_popup_invitation"
+            style="@style/InvPopupButton"
+            android:text="@string/accept_popup_invite" />
+    </LinearLayout>
+
+    <!-- "PLEASE WAIT" SCREEN -->
+    <LinearLayout android:id="@+id/screen_wait" style="@style/LLScreen">
+        <TextView style="@style/Blurb" android:text="@string/please_wait" />
+    </LinearLayout>
+
+    <!-- GAMEPLAY SCREEN -->
+    <RelativeLayout android:id="@+id/screen_game" style="@style/LLScreen" >
+    <com.karutakanji.MyImageView
+        android:id="@+id/karuta1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="98dp"
+        android:src="@drawable/karuta" />
+	</RelativeLayout>
+	
+    <!-- tela decidindo quem ira escolher categoria-->
+    <LinearLayout android:id="@+id/decidindoQuemEscolheACategoria" style="@style/LLScreen">
+        <TextView style="@style/Blurb" android:text="@string/decidindo_quem_escolhe_a_categoria" />
+    </LinearLayout>
+    
+    
+	
+    <!-- TELA DE ESCOLHA UMA CATEGORIA -->
+    <RelativeLayout android:id="@+id/tela_escolha_categoria"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.phiworks.sumosenseinew.EscolhaNivelActivity$PlaceholderFragment" >
+    <ListView
+        android:id="@+id/listaCategorias"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView1"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginBottom="88dp"
+        android:layout_toLeftOf="@+id/ok_button" >
+    </ListView>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/nihonball" />
+
+    <TextView
+        android:id="@+id/tituloEscolhaCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/titulo_escolha_categoria"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ok_button"
+        android:layout_alignRight="@+id/tituloEscolhaCategoria"
+        android:layout_marginBottom="120dp"
+        android:text="@string/escolha_a_duracao" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_marginTop="23dp"
+        android:orientation="vertical" >
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/uma_rodada"
+            android:onClick="onRadioButtonClicked" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/radioButton1"
+            android:layout_below="@+id/radioButton1"
+            android:text="@string/duas_rodadas"
+            android:onClick="onRadioButtonClicked" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/radioButton2"
+            android:text="@string/tres_rodadas"
+            android:onClick="onRadioButtonClicked" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/radioButton3"
+            android:layout_below="@+id/radioButton3"
+            android:text="@string/infinitas_rodadas"
+            android:onClick="onRadioButtonClicked" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/ok_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/radioGroup1"
+        android:text="OK" />
+	</RelativeLayout>
+	
+    <!-- TELA DO JOGO MULTIPLAYER -->
+    <RelativeLayout android:id="@+id/tela_jogo_multiplayer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+    
+        <TextView
+        android:id="@+id/pontuacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/pontuacao" />
+
+    <TextView
+        android:id="@+id/rodada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pontuacao"
+        android:layout_below="@+id/pontuacao"
+        android:text="@string/rodada" />
+    
+	<RelativeLayout android:layout_width="wrap_content"
+	    android:id="@+id/karuta3"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/karuta2"
+        android:layout_marginLeft="21dp"
+        android:layout_toRightOf="@+id/karuta2" >
+
+    <ImageView
+        android:id="@+id/karuta3_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta3"  
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta3" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+    </RelativeLayout>
+
+	<RelativeLayout
+            android:id="@+id/karuta5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/karuta1"
+        android:layout_below="@+id/karuta1"
+        android:layout_marginTop="20dp">
+
+    <ImageView
+        android:id="@+id/karuta5_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView  
+        android:id="@+id/texto_karuta5" 
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta5" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>
+	
+	<RelativeLayout  android:id="@+id/karuta6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/karuta2"
+        android:layout_alignTop="@+id/karuta5"
+            >
+
+    <ImageView
+        android:id="@+id/karuta6_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta6"   
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta6" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>>
+    
+    <RelativeLayout  android:id="@+id/karuta7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/karuta3"
+        android:layout_alignTop="@+id/karuta6">
+
+    <ImageView
+        android:id="@+id/karuta7_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta7"   
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta7" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>
+	
+    <RelativeLayout android:id="@+id/karuta4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/karuta5"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/karuta3" >
+
+    <ImageView
+        android:id="@+id/karuta4_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta4"   
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta4" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+    </RelativeLayout>
+
+    <RelativeLayout   
+        android:id="@+id/karuta8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/karuta4"
+        android:layout_alignTop="@+id/karuta7">
+
+    <ImageView
+        android:id="@+id/karuta8_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta8"  
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta8" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>
+	
+    <RelativeLayout  android:id="@+id/karuta1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tempo"
+        android:layout_centerVertical="true">
+
+    <ImageView
+        android:id="@+id/karuta1_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta1"   
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta1" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>
+	
+    <RelativeLayout 
+          android:id="@+id/karuta2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/karuta5"
+        android:layout_toRightOf="@+id/pontuacao">
+
+    <ImageView
+        android:id="@+id/karuta2_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta2"  
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta2" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>
+    <ImageView
+        android:id="@+id/item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/label_item"
+        android:layout_toRightOf="@+id/label_item"
+        android:src="@drawable/nenhumitem" />
+
+    <TextView
+        android:id="@+id/tempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rodada"
+        android:layout_below="@+id/rodada"
+        android:text="@string/tempo_restante" />
+
+    <TextView
+        android:id="@+id/label_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pontuacao"
+        android:layout_below="@+id/tempo"
+        android:text="@string/item" />
+
+    <RelativeLayout  android:id="@+id/dica_kanji_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/label_item"
+        android:layout_alignLeft="@+id/karuta3"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/pontuacao">
+
+    <ImageView
+        android:id="@+id/balao_fala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/balaofala" />
+
+    <TextView  
+        android:id="@+id/dica_kanji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/dica_kanji"
+           /> 
+	</RelativeLayout>
+        
+    <!-- TELA FIM DE JOGO -->
+	</RelativeLayout>
+	<RelativeLayout 
+    android:id="@+id/tela_fim_de_jogo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+    <TextView
+        android:id="@+id/tituloTelaFimDeJogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/tituloTelaFimDeJogo"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textoSuaPontuacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tituloTelaFimDeJogo"
+        android:layout_marginTop="15dp"
+        android:text="@string/suaPontuacao" />
+
+    <TextView
+        android:id="@+id/textoPontuacaoAdversario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textoSuaPontuacao"
+        android:layout_marginTop="14dp"
+        android:text="@string/pontuacaoDoAdversario" />
+    
+    <ListView
+      android:id="@+id/mensagens_chat"
+      android:layout_width="wrap_content"
+      android:layout_height="66dp"
+      android:layout_alignLeft="@+id/chatET"
+      android:layout_alignRight="@+id/sendBtn"
+      android:layout_alignParentBottom="true"
+      android:layout_below="@+id/chatET"
+      android:scrollbars="horizontal" >
+</ListView>
+
+  <Button
+      android:id="@+id/sendBtn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_below="@+id/textoPontuacaoAdversario"
+      android:layout_toRightOf="@+id/chatET"
+      android:text="@string/enviar_mensagem"
+      android:textStyle="bold"
+      android:onClick="mandarMensagemChat" />
+
+  <Button
+      android:id="@+id/botao_menu_principal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_alignRight="@+id/textoPontuacaoAdversario"
+      android:layout_marginRight="40dp"
+      android:text="@string/menu_principal" />
+
+  <Button
+      android:id="@+id/botao_revanche"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_toRightOf="@+id/botao_menu_principal"
+      android:text="@string/revanche" />
+
+  <EditText
+      android:id="@+id/chatET"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignLeft="@+id/textoPontuacaoAdversario"
+      android:layout_below="@+id/textoPontuacaoAdversario"
+      android:layout_alignRight="@+id/tituloTelaFimDeJogo"
+      android:ems="10"
+      android:hint="@string/instrucao_chat"
+      android:scrollHorizontally="true" />
+
+	</RelativeLayout>
+    
+</RelativeLayout>

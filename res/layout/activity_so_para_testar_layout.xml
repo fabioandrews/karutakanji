@@ -1,0 +1,258 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/tela_fim_de_jogo"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/pontuacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/pontuacao" />
+
+    <TextView
+        android:id="@+id/rodada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pontuacao"
+        android:layout_below="@+id/pontuacao"
+        android:text="@string/rodada" />
+    
+	<RelativeLayout android:layout_width="wrap_content"
+	    android:id="@+id/karuta3"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/karuta2"
+        android:layout_marginLeft="21dp"
+        android:layout_toRightOf="@+id/karuta2" >
+
+    <ImageView
+        android:id="@+id/karuta3_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta3"  
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta3" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+    </RelativeLayout>
+
+	<RelativeLayout
+            android:id="@+id/karuta5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/karuta1"
+        android:layout_below="@+id/karuta1"
+        android:layout_marginTop="20dp">
+
+    <ImageView
+        android:id="@+id/karuta5_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView  
+        android:id="@+id/texto_karuta5" 
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta5" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>
+	
+	<RelativeLayout  android:id="@+id/karuta6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/karuta2"
+        android:layout_alignTop="@+id/karuta5"
+            >
+
+    <ImageView
+        android:id="@+id/karuta6_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta6"   
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta6" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>>
+    
+    <RelativeLayout  android:id="@+id/karuta7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/karuta3"
+        android:layout_alignTop="@+id/karuta6">
+
+    <ImageView
+        android:id="@+id/karuta7_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta7"   
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta7" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>
+	
+    <RelativeLayout android:id="@+id/karuta4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/karuta5"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/karuta3" >
+
+    <ImageView
+        android:id="@+id/karuta4_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta4"   
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta4" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+    </RelativeLayout>
+
+    <RelativeLayout   
+        android:id="@+id/karuta8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/karuta4"
+        android:layout_alignTop="@+id/karuta7">
+
+    <ImageView
+        android:id="@+id/karuta8_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta8"  
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta8" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>
+	
+    <RelativeLayout  android:id="@+id/karuta1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tempo"
+        android:layout_centerVertical="true">
+
+    <ImageView
+        android:id="@+id/karuta1_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta1"   
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta1" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>
+	
+    <RelativeLayout 
+          android:id="@+id/karuta2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/karuta5"
+        android:layout_toRightOf="@+id/pontuacao">
+
+    <ImageView
+        android:id="@+id/karuta2_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/karutavazia" />
+
+    <TextView
+        android:id="@+id/texto_karuta2"  
+        android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:text="@string/texto_karuta2" 
+               android:layout_centerInParent="true"
+               android:textStyle="bold"
+           /> 
+	</RelativeLayout>
+    <ImageView
+        android:id="@+id/item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/label_item"
+        android:layout_toRightOf="@+id/label_item"
+        android:src="@drawable/nenhumitem" />
+
+    <TextView
+        android:id="@+id/tempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rodada"
+        android:layout_below="@+id/rodada"
+        android:text="@string/tempo_restante" />
+
+    <TextView
+        android:id="@+id/label_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pontuacao"
+        android:layout_below="@+id/tempo"
+        android:text="@string/item" />
+
+    <RelativeLayout  android:id="@+id/dica_kanji_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/label_item"
+        android:layout_alignLeft="@+id/karuta3"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/pontuacao">
+
+    <ImageView
+        android:id="@+id/balao_fala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/balaofala" />
+
+    <TextView  
+        android:id="@+id/dica_kanji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/dica_kanji"
+           /> 
+           </RelativeLayout>
+
+</RelativeLayout>
