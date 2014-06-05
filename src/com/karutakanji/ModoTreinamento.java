@@ -584,21 +584,21 @@ public class ModoTreinamento extends ActivityDoJogoComSom implements OnClickList
 						//umKanji ja existe nos velhos
 						umKanjiJaExisteNosKanjisVelhos = true;
 					}
-					else
+					
+				}
+				
+				//esse kanji velho nao pode pertencer aos ultimos kanjis
+				for(int k = 0; k < this.ultimosKanjis.size(); k++)
+				{
+					KanjiTreinar umDosUltimos = this.ultimosKanjis.get(k);
+					if((umDosUltimos.getKanji().compareTo(umKanji.getKanji()) == 0)
+							&& (umDosUltimos.getCategoriaAssociada().compareTo(umKanji.getCategoriaAssociada()) == 0))
 					{
-						//esse kanji velho nao pode pertencer aos ultimos kanjis
-						for(int k = 0; k < this.ultimosKanjis.size(); k++)
-						{
-							KanjiTreinar umDosUltimos = this.ultimosKanjis.get(k);
-							if((umDosUltimos.getKanji().compareTo(umKanji.getKanji()) == 0)
-									&& (umDosUltimos.getCategoriaAssociada().compareTo(umKanji.getCategoriaAssociada()) == 0))
-							{
-								//o kanjivelho eh um dos ultimos! nao pode! Devemos escolher outro kanji velho, por isso vamos obrigar que outro kanji seja escolhido
-								umKanjiJaExisteNosKanjisVelhos = true;
-							}
-						}
+						//o kanjivelho eh um dos ultimos! nao pode! Devemos escolher outro kanji velho, por isso vamos obrigar que outro kanji seja escolhido
+						umKanjiJaExisteNosKanjisVelhos = true;
 					}
 				}
+				
 				
 				if(umKanjiJaExisteNosKanjisVelhos == true)
 				{

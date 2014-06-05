@@ -21,6 +21,7 @@
         android:gravity="center"
         android:layout_above="@+id/imagem_do_macete_do_kanji"
         android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:text="Em cima é uma nota. Embaixo, uma pilha de moedas. O que você pode fazer com dinheiro? Comprar"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

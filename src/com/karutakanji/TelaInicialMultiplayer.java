@@ -1904,6 +1904,7 @@ private void solicitarPorKanjisPraTreino() {
 	 findViewById(R.id.dica_kanji_layout).setVisibility(View.VISIBLE);
 	 findViewById(R.id.dica_kanji).setVisibility(View.VISIBLE);
 	 findViewById(R.id.balao_fala).setVisibility(View.VISIBLE);
+	 findViewById(R.id.parartempopequeno).setVisibility(View.INVISIBLE);
 	 
 	 findViewById(R.id.karuta1_imageview).setOnClickListener(this);
 	 findViewById(R.id.karuta2_imageview).setOnClickListener(this);
@@ -1937,8 +1938,8 @@ private void solicitarPorKanjisPraTreino() {
 	 this.itensDoGanhador = new LinkedList<String>();
 	 this.itensDoPerdedor = new LinkedList<String>();
 	 //itensDoGanhador.add("trovaotiracartaaleatoria");
-	 //itensDoGanhador.add("parartempo");
-	 itensDoGanhador.add("misturarcartas");
+	 itensDoGanhador.add("parartempo");
+	 //itensDoGanhador.add("misturarcartas");
 	 /*itensDoGanhador.add("mudardica");*/
 	 //itensDoPerdedor.add("doisx");
 	 //itensDoPerdedor.add("segundamao");
@@ -3152,6 +3153,7 @@ private void solicitarPorKanjisPraTreino() {
  {
 	 TextView textViewTempo = (TextView) findViewById(R.id.tempo);
 	 textViewTempo.setTextColor(Color.RED);
+	 findViewById(R.id.parartempopequeno).setVisibility(View.VISIBLE);
 	 
 	 this.tempoEstahParado = true;
 	 
@@ -3198,6 +3200,7 @@ private void solicitarPorKanjisPraTreino() {
 		            	tempoEstahParado = false;
 		            	TextView textViewTempo = (TextView) findViewById(R.id.tempo);
 		           	 	textViewTempo.setTextColor(Color.BLACK);
+		           	 	findViewById(R.id.parartempopequeno).setVisibility(View.INVISIBLE);
 		                terminouEsperaUsuarioErrouCarta();
 		            }
 		        });
@@ -3639,7 +3642,6 @@ private void solicitarPorKanjisPraTreino() {
  {
  	//mandar mensagem para oponente...
  	this.mandarMensagemMultiplayer("oponente falou no chat=" + mensagemAdicionarNoChat);
- 	Toast.makeText(getApplicationContext(), "adicionarMensagemNoChat() chamado", Toast.LENGTH_SHORT).show();
  }
 
  private void enviarSeuEmailParaOAdversario()
