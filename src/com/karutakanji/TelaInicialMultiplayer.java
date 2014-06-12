@@ -56,6 +56,8 @@ import com.google.android.gms.games.multiplayer.realtime.RoomStatusUpdateListene
 import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
 import com.google.example.games.basegameutils.BaseGameActivity;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,6 +68,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -140,6 +143,7 @@ private LinkedList<String> itensDoGanhador;
 
 private ImageView cartaASerTirada; //na hora que o item do trovao for usado, precisaremos armazenar algo nesse atributo so p passar p outra funcao
 private boolean usouTrovaoTiraCarta; //booleano que diz se o usuario usou o item trovaotiracarta
+private boolean usouReviveCarta; //booleano que diz se o usuario usou o item revivecarta
 
 public boolean guestTerminouDeCarregarListaDeCategorias; //booleano para resolver problema de um dos jogadores nao estar recebendo a lista de categorias
 private Handler mHandler = new Handler(); //handler para o chat do final do jogo
@@ -174,7 +178,6 @@ public void onCreate(Bundle savedInstanceState)
 	}
 	
 	findViewById(R.id.botao_menu_principal).setOnClickListener(this);
-	
 }
 
 /**
@@ -262,7 +265,7 @@ switch (v.getId()) {
         startQuickGame();
         break;
     case R.id.karuta1_imageview:
-    	if(this.usouTrovaoTiraCarta == false) //no caso do trovao, ele clica numa carta p elimina-la
+    	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta1 = (TextView) findViewById(R.id.texto_karuta1);
         	String textoKaruta1 = textViewKaruta1.getText().toString();
@@ -299,6 +302,15 @@ switch (v.getId()) {
         		this.realizarProcedimentoUsuarioErrouCarta();
         	}
     	}
+    	else if(this.usouReviveCarta == true)
+    	{
+    		this.mandarMensagemMultiplayer("item revivercarta numeroCarta=1");
+    		this.realizarProcedimentoReviverCarta(1,false);
+    		this.usouReviveCarta = false; //nao esquecer que ele perde o item
+    		ImageView imageViewItem = (ImageView)findViewById(R.id.item);
+    		imageViewItem.setImageResource(R.drawable.nenhumitem);
+    		
+    	}
     	else
     	{
     		KanjiTreinar kanjiCartaQueEleClicou = this.kanjisDasCartasNaTela.get(0);
@@ -322,7 +334,7 @@ switch (v.getId()) {
     	
     	break;
     case R.id.karuta2_imageview:
-    	if(this.usouTrovaoTiraCarta == false) //no caso do trovao, ele clica numa carta p elimina-la
+    	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta2 = (TextView) findViewById(R.id.texto_karuta2);
         	String textoKaruta2 = textViewKaruta2.getText().toString();
@@ -358,6 +370,14 @@ switch (v.getId()) {
         		this.realizarProcedimentoUsuarioErrouCarta();
         	}
     	}
+    	else if(this.usouReviveCarta == true)
+    	{
+    		this.mandarMensagemMultiplayer("item revivercarta numeroCarta=2");
+    		this.realizarProcedimentoReviverCarta(2,false);
+    		this.usouReviveCarta = false; //nao esquecer que ele perde o item
+    		ImageView imageViewItem = (ImageView)findViewById(R.id.item);
+    		imageViewItem.setImageResource(R.drawable.nenhumitem);
+    	}
     	else
     	{
     		KanjiTreinar kanjiCartaQueEleClicou = this.kanjisDasCartasNaTela.get(1);
@@ -381,7 +401,7 @@ switch (v.getId()) {
     	}
     	break;
     case R.id.karuta3_imageview:
-    	if(this.usouTrovaoTiraCarta == false) //no caso do trovao, ele clica numa carta p elimina-la
+    	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta3 = (TextView) findViewById(R.id.texto_karuta3);
         	String textoKaruta3 = textViewKaruta3.getText().toString();
@@ -417,6 +437,14 @@ switch (v.getId()) {
         		this.realizarProcedimentoUsuarioErrouCarta();
         	}
     	}
+    	else if(this.usouReviveCarta == true)
+    	{
+    		this.mandarMensagemMultiplayer("item revivercarta numeroCarta=3");
+    		this.realizarProcedimentoReviverCarta(3,false);
+    		this.usouReviveCarta = false; //nao esquecer que ele perde o item
+    		ImageView imageViewItem = (ImageView)findViewById(R.id.item);
+    		imageViewItem.setImageResource(R.drawable.nenhumitem);
+    	}
     	else
     	{
     		KanjiTreinar kanjiCartaQueEleClicou = this.kanjisDasCartasNaTela.get(2);
@@ -440,7 +468,7 @@ switch (v.getId()) {
     	}
     	break;
     case R.id.karuta4_imageview:
-    	if(this.usouTrovaoTiraCarta == false) //no caso do trovao, ele clica numa carta p elimina-la
+    	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta4 = (TextView) findViewById(R.id.texto_karuta4);
         	String textoKaruta4 = textViewKaruta4.getText().toString();
@@ -476,6 +504,14 @@ switch (v.getId()) {
         		this.realizarProcedimentoUsuarioErrouCarta();
         	}
     	}
+    	else if(this.usouReviveCarta == true)
+    	{
+    		this.mandarMensagemMultiplayer("item revivercarta numeroCarta=4");
+    		this.realizarProcedimentoReviverCarta(4,false);
+    		this.usouReviveCarta = false; //nao esquecer que ele perde o item
+    		ImageView imageViewItem = (ImageView)findViewById(R.id.item);
+    		imageViewItem.setImageResource(R.drawable.nenhumitem);
+    	}
     	else
     	{
     		KanjiTreinar kanjiCartaQueEleClicou = this.kanjisDasCartasNaTela.get(3);
@@ -499,7 +535,7 @@ switch (v.getId()) {
     	}
     	break;
     case R.id.karuta5_imageview:
-    	if(this.usouTrovaoTiraCarta == false) //no caso do trovao, ele clica numa carta p elimina-la
+    	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta5 = (TextView) findViewById(R.id.texto_karuta5);
         	String textoKaruta5 = textViewKaruta5.getText().toString();
@@ -535,6 +571,14 @@ switch (v.getId()) {
         		this.realizarProcedimentoUsuarioErrouCarta();
         	}
     	}
+    	else if(this.usouReviveCarta == true)
+    	{
+    		this.mandarMensagemMultiplayer("item revivercarta numeroCarta=5");
+    		this.realizarProcedimentoReviverCarta(5,false);
+    		this.usouReviveCarta = false; //nao esquecer que ele perde o item
+    		ImageView imageViewItem = (ImageView)findViewById(R.id.item);
+    		imageViewItem.setImageResource(R.drawable.nenhumitem);
+    	}
     	else
     	{
     		KanjiTreinar kanjiCartaQueEleClicou = this.kanjisDasCartasNaTela.get(4);
@@ -558,7 +602,7 @@ switch (v.getId()) {
     	}
     	break;
     case R.id.karuta6_imageview:
-    	if(this.usouTrovaoTiraCarta == false) //no caso do trovao, ele clica numa carta p elimina-la
+    	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta6 = (TextView) findViewById(R.id.texto_karuta6);
         	String textoKaruta6 = textViewKaruta6.getText().toString();
@@ -594,6 +638,14 @@ switch (v.getId()) {
         		this.realizarProcedimentoUsuarioErrouCarta();
         	}
     	}
+    	else if(this.usouReviveCarta == true)
+    	{
+    		this.mandarMensagemMultiplayer("item revivercarta numeroCarta=6");
+    		this.realizarProcedimentoReviverCarta(6,false);
+    		this.usouReviveCarta = false; //nao esquecer que ele perde o item
+    		ImageView imageViewItem = (ImageView)findViewById(R.id.item);
+    		imageViewItem.setImageResource(R.drawable.nenhumitem);
+    	}
     	else
     	{
     		KanjiTreinar kanjiCartaQueEleClicou = this.kanjisDasCartasNaTela.get(5);
@@ -617,7 +669,7 @@ switch (v.getId()) {
     	}
     	break;
     case R.id.karuta7_imageview:
-    	if(this.usouTrovaoTiraCarta == false) //no caso do trovao, ele clica numa carta p elimina-la
+    	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta7 = (TextView) findViewById(R.id.texto_karuta7);
         	String textoKaruta7 = textViewKaruta7.getText().toString();
@@ -653,6 +705,14 @@ switch (v.getId()) {
         		this.realizarProcedimentoUsuarioErrouCarta();
         	}
     	}
+    	else if(this.usouReviveCarta == true)
+    	{
+    		this.mandarMensagemMultiplayer("item revivercarta numeroCarta=7");
+    		this.realizarProcedimentoReviverCarta(7,false);
+    		this.usouReviveCarta = false; //nao esquecer que ele perde o item
+    		ImageView imageViewItem = (ImageView)findViewById(R.id.item);
+    		imageViewItem.setImageResource(R.drawable.nenhumitem);
+    	}
     	else
     	{
     		KanjiTreinar kanjiCartaQueEleClicou = this.kanjisDasCartasNaTela.get(6);
@@ -676,7 +736,7 @@ switch (v.getId()) {
     	}
     	break;
     case R.id.karuta8_imageview:
-    	if(this.usouTrovaoTiraCarta == false) //no caso do trovao, ele clica numa carta p elimina-la
+    	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta8 = (TextView) findViewById(R.id.texto_karuta8);
         	String textoKaruta8 = textViewKaruta8.getText().toString();
@@ -711,6 +771,14 @@ switch (v.getId()) {
         		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(7)); //colocar no log que ele errou este kanji
         		this.realizarProcedimentoUsuarioErrouCarta();
         	}
+    	}
+    	else if(this.usouReviveCarta == true)
+    	{
+    		this.mandarMensagemMultiplayer("item revivercarta numeroCarta=8");
+    		this.realizarProcedimentoReviverCarta(8,false);
+    		this.usouReviveCarta = false; //nao esquecer que ele perde o item
+    		ImageView imageViewItem = (ImageView)findViewById(R.id.item);
+    		imageViewItem.setImageResource(R.drawable.nenhumitem);
     	}
     	else
     	{
@@ -1466,9 +1534,10 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		}
 		
 	}
-	else if(mensagem.contains("kanjiDaDica=") == true)
+	else if(mensagem.contains("kanjiDaDica=") == true && mensagem.contains("item") == false)
 	{
 		//alguem acertou algum kanji(ou eh o comeco de tudo) e eh necessairo mudar a dica do kanji
+		//e nao eh o item p mudar a dica atual
 		//formato: kanjiDaDica=asa|Cotidiano
 		String kanjiECategoria = mensagem.replace("kanjiDaDica=", "");
 		String[] kanjiECategoriaArray = kanjiECategoria.split("\\|");
@@ -1624,6 +1693,27 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		}
 		
 		this.misturarCartasRecebeuCartasOutroUsuario(textoKanjisNovos, categoriasKanjisNovos);
+	}
+	else if(mensagem.contains("item mudardica kanjiDaDica=") == true)
+	{
+		this.tirarKanjiDicaAtualDeCartasQueJaViraramDicasEPalavrasJogadas();
+		
+		String kanjiECategoria = mensagem.replace("item mudardica kanjiDaDica=", "");
+		String[] kanjiECategoriaArray = kanjiECategoria.split("\\|");
+		String kanji = kanjiECategoriaArray[0];
+		String categoria = kanjiECategoriaArray[1];
+		
+		this.kanjiDaDica = ArmazenaKanjisPorCategoria.pegarInstancia().acharKanji(categoria, kanji);
+		this.palavrasJogadas.add(kanjiDaDica);
+		this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.add(this.kanjiDaDica);
+		this.realizarProcedimentoMudandoDicaAtual();
+	}
+	else if(mensagem.contains("item revivercarta numeroCarta=") == true)
+	{
+		//adversario reviveu uma carta
+		String stringNumeroCartaRevivida = mensagem.replace("item revivercarta numeroCarta=", "");
+		int numeroCartaRevivida = Integer.valueOf(stringNumeroCartaRevivida);
+		this.realizarProcedimentoReviverCarta(numeroCartaRevivida,true);
 	}
 	else if(mensagem.contains("termineiDeCarregarListaDeCategoria;") == true)
 	{
@@ -1940,14 +2030,15 @@ private void solicitarPorKanjisPraTreino() {
 	 //itensDoGanhador.add("trovaotiracartaaleatoria");
 	 itensDoGanhador.add("parartempo");
 	 //itensDoGanhador.add("misturarcartas");
-	 /*itensDoGanhador.add("mudardica");*/
-	 //itensDoPerdedor.add("doisx");
+	 //itensDoPerdedor.add("mudardica");
+	 //itensDoGanhador.add("doisx");
 	 //itensDoPerdedor.add("segundamao");
 	 //itensDoPerdedor.add("areadica");
-	 itensDoPerdedor.add("trovaotiracarta");
-	 //itensDoPerdedor.add("revivecarta");
+	 //itensDoPerdedor.add("trovaotiracarta");
+	 itensDoPerdedor.add("revivecarta");
 	 
 	 this.usouTrovaoTiraCarta = false;
+	 this.usouReviveCarta = false;
 	 
 	 TextView textoTempo = (TextView) findViewById(R.id.tempo);
 	 String stringTempo = getResources().getString(R.string.tempo_restante);
@@ -2086,41 +2177,49 @@ private void solicitarPorKanjisPraTreino() {
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta1);
 					 texto.setText(kanjiTreinar.getKanji());
+					 findViewById(R.id.karuta1_imageview).setClickable(true);
 				 }
 				 else if(i == 1)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta2);
 					 texto.setText(kanjiTreinar.getKanji());
+					 findViewById(R.id.karuta2_imageview).setClickable(true);
 				 }
 				 else if(i == 2)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta3);
 					 texto.setText(kanjiTreinar.getKanji());
+					 findViewById(R.id.karuta3_imageview).setClickable(true);
 				 }
 				 else if(i == 3)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta4);
 					 texto.setText(kanjiTreinar.getKanji());
+					 findViewById(R.id.karuta4_imageview).setClickable(true);
 				 }
 				 else if(i == 4)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta5);
 					 texto.setText(kanjiTreinar.getKanji());
+					 findViewById(R.id.karuta5_imageview).setClickable(true);
 				 }
 				 else if(i == 5)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta6);
 					 texto.setText(kanjiTreinar.getKanji());
+					 findViewById(R.id.karuta6_imageview).setClickable(true);
 				 }
 				 else if(i == 6)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta7);
 					 texto.setText(kanjiTreinar.getKanji());
+					 findViewById(R.id.karuta7_imageview).setClickable(true);
 				 }
 				 else if(i == 7)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta8);
 					 texto.setText(kanjiTreinar.getKanji());
+					 findViewById(R.id.karuta8_imageview).setClickable(true);
 				 } 
 				 
 			 }
@@ -2575,6 +2674,7 @@ private void solicitarPorKanjisPraTreino() {
 	 String hiraganaDoKanji = this.kanjiDaDica.getHiraganaDoKanji();
 	 String traducaoDoKanji = this.kanjiDaDica.getTraducaoEmPortugues();
 	 textoDica.setText(hiraganaDoKanji + "(" + traducaoDoKanji + ")");
+	 
  }
  
  
@@ -3015,7 +3115,7 @@ private void solicitarPorKanjisPraTreino() {
 	 }
 	 else if(this.itemAtual.compareTo("mudardica") == 0)
 	 {
-		 
+		 this.usarItemMudarDica();
 	 }
 	 else if(this.itemAtual.compareTo("doisx") == 0)
 	 {
@@ -3037,10 +3137,22 @@ private void solicitarPorKanjisPraTreino() {
 	 }
 	 else if(this.itemAtual.compareTo("revivecarta") == 0)
 	 {
+		 ImageView item = (ImageView) findViewById(R.id.item);
+		 item.setImageResource(R.drawable.escolhaumacartarevive);
+		 this.usouReviveCarta = true;
 		 
+		 //falta tornar todas as cartas clicaveis novamente p o usuario escolher uma carta p reviver
+		 findViewById(R.id.karuta1_imageview).setClickable(true);
+		 findViewById(R.id.karuta2_imageview).setClickable(true);
+		 findViewById(R.id.karuta3_imageview).setClickable(true);
+		 findViewById(R.id.karuta4_imageview).setClickable(true);
+		 findViewById(R.id.karuta5_imageview).setClickable(true);
+		 findViewById(R.id.karuta6_imageview).setClickable(true);
+		 findViewById(R.id.karuta7_imageview).setClickable(true);
+		 findViewById(R.id.karuta8_imageview).setClickable(true);
 	 }
 	 
-	 if(this.itemAtual.compareTo("trovaotiracarta") != 0)
+	 if(this.itemAtual.compareTo("trovaotiracarta") != 0 && this.itemAtual.compareTo("revivecarta") != 0)
 	 {
 		 ImageView imagemItem = (ImageView) findViewById(R.id.item);
 		 imagemItem.setImageResource(R.drawable.nenhumitem);
@@ -3048,7 +3160,7 @@ private void solicitarPorKanjisPraTreino() {
 		 this.itemAtual = "";
 		 imagemItem.setClickable(false); 
 	 }
-	 else
+	 else if(this.itemAtual.compareTo("trovaotiracarta") == 0 || this.itemAtual.compareTo("revivecarta") == 0)
 	 {
 		 ImageView imagemItem = (ImageView) findViewById(R.id.item);
 		 imagemItem.setClickable(false);
@@ -3185,7 +3297,7 @@ private void solicitarPorKanjisPraTreino() {
 	 karuta7.setAlpha(128);
 	 karuta8.setAlpha(128);
 	 
-	 
+	 super.reproduzirSfx("parar_tempo");
 	 new Timer().schedule(new TimerTask() 
 	 { 
 		    @Override
@@ -3528,7 +3640,6 @@ private void solicitarPorKanjisPraTreino() {
 		            public void run() 
 		            {
 		            	mudarCartasNaTela(kanjisEBarrasComCategoria); //so irei realizar essa funcao apos a animacao ter sido realizada em cada uma das cartas
-		            	
 		            	if(kanjisDasCartasNaTelaQueJaSeTornaramDicas.size() < 8)
 		        		{
 		        			//menos de 8 cartas, por isso algumas devem ficar vazias
@@ -3539,6 +3650,336 @@ private void solicitarPorKanjisPraTreino() {
 		        });
 		    }
 		}, 1200);
+ }
+ 
+ /*caso uma nova dica possa ser criada, a dica atual mudarah. */
+ private void usarItemMudarDica()
+ {
+	 if(kanjisDasCartasNaTela.size() == kanjisDasCartasNaTelaQueJaSeTornaramDicas.size())
+	 {
+		 //sinto muito, mas nao ha dicas diferentes que possam ser geradas. A ultima dica ja esta presente
+		 String mensagemErroMudarDica = getResources().getString(R.string.erro_mudar_dica);
+		 Toast.makeText(this, mensagemErroMudarDica, Toast.LENGTH_SHORT).show();
+	 }
+	 else
+	 { 
+		 //acharemos uma nova dica que seja diferente da anterior
+		 //primeiro, precisamos remover o kanji da dica da linkedlist chamada kanjisDasCartasNaTelaQueJaSeTornaramDicas
+		 
+		 this.tirarKanjiDicaAtualDeCartasQueJaViraramDicasEPalavrasJogadas();
+		 
+		 //agora vamos gerar um novo kanji da dica diferente da anterior
+		 
+		 LinkedList<KanjiTreinar> kanjisQueAindaNaoViraramDicas = new LinkedList<KanjiTreinar>();
+		 
+		 for(int i = 0; i < this.kanjisDasCartasNaTela.size(); i++)
+		 {
+			 KanjiTreinar umKanji = this.kanjisDasCartasNaTela.get(i);
+			 
+			 boolean kanjiJaVirouDica = false;
+			 for(int j = 0; j < this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.size(); j++)
+			 {
+				 KanjiTreinar umKanjiQueVirouDica = this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.get(j);
+				 
+				 if(umKanjiQueVirouDica.getKanji().compareTo(umKanji.getKanji()) == 0)
+				 {
+					 kanjiJaVirouDica = true;
+					 break;
+				 }
+			 }
+			 
+			 if(kanjiJaVirouDica == false 
+					 && (this.ehMesmoKanji(umKanji, kanjiDaDica) == false))
+			 {
+				 //agora tb n queremos que esse kanji seja a antiga dica!!!!
+				 kanjisQueAindaNaoViraramDicas.add(umKanji);
+			 }
+		 }
+		 
+		 Random geraNumAleatorio = new Random();
+		 int tamanhoKanjisQueNaoViraramDicas = kanjisQueAindaNaoViraramDicas.size();
+		 
+		 int indiceKanjiDaDica = geraNumAleatorio.nextInt(tamanhoKanjisQueNaoViraramDicas);
+		 
+		 KanjiTreinar umKanji = kanjisQueAindaNaoViraramDicas.get(indiceKanjiDaDica);
+		 this.kanjiDaDica = umKanji;
+		 this.palavrasJogadas.add(kanjiDaDica);
+		 
+		 String mensagem = "item mudardica kanjiDaDica=" + this.kanjiDaDica.getKanji() + "|" + this.kanjiDaDica.getCategoriaAssociada();
+		 this.mandarMensagemMultiplayer(mensagem);
+		 
+		 //this.alterarTextoDicaComBaseNoKanjiDaDica(); //vamos realizar um poof antes de mudar esse texto
+		 
+		 this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.add(umKanji);
+		 
+		 this.realizarProcedimentoMudandoDicaAtual();
+			 
+	 }
+ }
+ 
+ private boolean ehMesmoKanji(KanjiTreinar k1, KanjiTreinar k2)
+ {
+	 if((k1.getKanji().compareTo(k2.getKanji()) == 0) && (k1.getCategoriaAssociada().compareTo(k2.getCategoriaAssociada()) == 0))
+	 {
+		 return true;
+	 }
+	 else
+	 {
+		 return false;
+	 }
+ }
+ 
+ private void tirarKanjiDicaAtualDeCartasQueJaViraramDicasEPalavrasJogadas()
+ {
+	//primeiro, precisamos remover o kanji da dica da linkedlist chamada kanjisDasCartasNaTelaQueJaSeTornaramDicas
+	 for(int g = 0; g < this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.size(); g++)
+	 {
+		 KanjiTreinar umKanjiJaVirouDica = this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.get(g);
+		 
+		 if((umKanjiJaVirouDica.getKanji().compareTo(kanjiDaDica.getKanji()) == 0) 
+			 && (umKanjiJaVirouDica.getCategoriaAssociada().compareTo(kanjiDaDica.getCategoriaAssociada()) == 0))
+		 {
+			 //achamos o kanji da dica! Falta remove-lo
+			 this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.remove(g);
+			 break;	 
+		 } 
+	 }
+	 
+	 //agora precisamos remove-lo das palavras jogadas tb
+	 
+	 for(int h = 0; h < this.palavrasJogadas.size(); h++)
+	 {
+		 KanjiTreinar umKanjiJaJogado = this.palavrasJogadas.get(h);
+		 
+		 if((umKanjiJaJogado.getKanji().compareTo(kanjiDaDica.getKanji()) == 0) 
+			 && (umKanjiJaJogado.getCategoriaAssociada().compareTo(kanjiDaDica.getCategoriaAssociada()) == 0))
+		 {
+			 //achamos o kanji da dica! Falta remove-lo
+			 this.palavrasJogadas.remove(h);
+			 break;	 
+		 } 
+	 }
+ }
+ 
+ //a dica atual ficarah com "..." por alguns segundos ate mudar
+ private void realizarProcedimentoMudandoDicaAtual()
+ {
+	 TextView textoDicaKanji = (TextView) findViewById(R.id.dica_kanji);
+	 String mensagemDicaMudando = getResources().getString(R.string.palavra_esta_mudando);
+	 textoDicaKanji.setText(mensagemDicaMudando);
+	 
+	 super.reproduzirSfx("mudar_dica");
+	 
+	 //durante essa espera, as cartas n devem ser clicaveis
+	 ImageView imageViewCarta1 = (ImageView) findViewById(R.id.karuta1_imageview);
+	 ImageView imageViewCarta2 = (ImageView) findViewById(R.id.karuta2_imageview);
+	 ImageView imageViewCarta3 = (ImageView) findViewById(R.id.karuta3_imageview);
+	 ImageView imageViewCarta4 = (ImageView) findViewById(R.id.karuta4_imageview);
+	 ImageView imageViewCarta5 = (ImageView) findViewById(R.id.karuta5_imageview);
+	 ImageView imageViewCarta6 = (ImageView) findViewById(R.id.karuta6_imageview);
+	 ImageView imageViewCarta7 = (ImageView) findViewById(R.id.karuta7_imageview);
+	 ImageView imageViewCarta8 = (ImageView) findViewById(R.id.karuta8_imageview);
+	 
+	 
+	 imageViewCarta1.setClickable(false);
+	 imageViewCarta2.setClickable(false);
+	 imageViewCarta3.setClickable(false);
+	 imageViewCarta4.setClickable(false);
+	 imageViewCarta5.setClickable(false);
+	 imageViewCarta6.setClickable(false);
+	 imageViewCarta7.setClickable(false);
+	 imageViewCarta8.setClickable(false);
+	 
+	 final String[] kanjisEBarrasComCategoria = new String[this.kanjisDasCartasNaTela.size()]; //so preciso disso p tornar as cartas clicaveis novamente e somente aquelas que deveriam ser clicaveis
+	 for(int i = 0; i < this.kanjisDasCartasNaTela.size(); i++)
+	 {
+		 KanjiTreinar umKanji = this.kanjisDasCartasNaTela.get(i);
+		 kanjisEBarrasComCategoria[i] = umKanji.getKanji() + "|" + umKanji.getCategoriaAssociada();
+		 
+	 }
+	 
+	 
+	 new Timer().schedule(new TimerTask() 
+	 { 
+		    @Override
+		    public void run() 
+		    {
+		        //If you want to operate UI modifications, you must run ui stuff on UiThread.
+		        TelaInicialMultiplayer.this.runOnUiThread(new Runnable() 
+		        {
+		            @Override
+		            public void run() 
+		            {
+		            	mudarCartasNaTela(kanjisEBarrasComCategoria); //so irei realizar essa funcao apos a animacao ter sido realizada
+		            	if(kanjisDasCartasNaTelaQueJaSeTornaramDicas.size() < 8)
+		        		{
+		        			//menos de 8 cartas, por isso algumas devem ficar vazias
+		        			tornarORestoDasCartasNaTelaVazias();
+		        		}
+		            	alterarTextoDicaComBaseNoKanjiDaDica();
+		            }
+		        });
+		    }
+		}, 3000);
+ }
+ 
+ /*o usuario usou o item para reviver uma carta. O numero da carta vai de 1 ate 8*/
+ private void realizarProcedimentoReviverCarta(int numeroCarta, boolean ehUsuarioQueRecebeuMensagem)
+ {
+	 KanjiTreinar kanjiRevivido = this.kanjisDasCartasNaTela.get(numeroCarta - 1);
+	 
+	 //temos de tirar ele das cartas que ja viraram dicas
+	 //mas o usuario pode dar uma de engracadinho e tentar reviver uma carta que ta viva!
+	 //o usuario n pode reviver carta ja viva ou a da dicaatual
+	 boolean cartaFoiRemovidaDaLinkedListTornaramDicas = false;
+	 String textoCartaRevivida = "";
+	 for(int i = 0; i < this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.size(); i++)
+	 {
+		 KanjiTreinar umKanjiQueJaVirouDica = this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.get(i);
+		 
+		 if(this.ehMesmoKanji(umKanjiQueJaVirouDica, kanjiRevivido) == true &&
+				 this.ehMesmoKanji(this.kanjiDaDica, kanjiRevivido) == false)
+		 {
+			 //achamos o kanji que era p reviver! Ele n pode ser o kanji da dica
+			 this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.remove(i);
+			 textoCartaRevivida = umKanjiQueJaVirouDica.getKanji();
+			 cartaFoiRemovidaDaLinkedListTornaramDicas = true;
+			 break;
+		 }
+	 }
+	 
+	 if(cartaFoiRemovidaDaLinkedListTornaramDicas == false)
+	 {
+		 //dizer ao usuario que essa carta nao pode ser revivida. O usuario q recebeu a mensagem da carta ser revivida n deve receber esse informativo
+		 if(ehUsuarioQueRecebeuMensagem == false)
+		 {
+			 String mensagemErroReviverCarta = getResources().getString(R.string.erro_reviver_carta);
+			 TextView textViewFalaMascote = (TextView) findViewById(R.id.dica_kanji);
+			 String fraseAtualMascote = String.valueOf(textViewFalaMascote.getText());
+			 mascoteFalaFrasePor4Segundos(mensagemErroReviverCarta, fraseAtualMascote);
+		 } 
+	 }
+	 else
+	 {
+		 //Falta mudar a figura da carta para nao ser mais a imagem de carta removida
+		 ImageView imageViewCartaRevivida;
+		 TextView textViewCartaRevivida;
+		 if(numeroCarta == 1)
+		 {
+			 imageViewCartaRevivida = (ImageView)findViewById(R.id.karuta1_imageview);
+			 textViewCartaRevivida = (TextView)findViewById(R.id.texto_karuta1);
+		 }
+		 else if(numeroCarta == 2)
+		 {
+			 imageViewCartaRevivida = (ImageView)findViewById(R.id.karuta2_imageview);
+			 textViewCartaRevivida = (TextView)findViewById(R.id.texto_karuta2);
+		 }
+		 else if(numeroCarta == 3)
+		 {
+			 imageViewCartaRevivida = (ImageView)findViewById(R.id.karuta3_imageview);
+			 textViewCartaRevivida = (TextView)findViewById(R.id.texto_karuta3);
+		 }
+		 else if(numeroCarta == 4)
+		 {
+			 imageViewCartaRevivida = (ImageView)findViewById(R.id.karuta4_imageview);
+			 textViewCartaRevivida = (TextView)findViewById(R.id.texto_karuta4);
+		 }
+		 else if(numeroCarta == 5)
+		 {
+			 imageViewCartaRevivida = (ImageView)findViewById(R.id.karuta5_imageview);
+			 textViewCartaRevivida = (TextView)findViewById(R.id.texto_karuta5);
+		 }
+		 else if(numeroCarta == 6)
+		 {
+			 imageViewCartaRevivida = (ImageView)findViewById(R.id.karuta6_imageview);
+			 textViewCartaRevivida = (TextView)findViewById(R.id.texto_karuta6);
+		 }
+		 else if(numeroCarta == 7)
+		 {
+			 imageViewCartaRevivida = (ImageView)findViewById(R.id.karuta7_imageview);
+			 textViewCartaRevivida = (TextView)findViewById(R.id.texto_karuta7);
+		 }
+		 else
+		 {
+			 imageViewCartaRevivida = (ImageView)findViewById(R.id.karuta8_imageview);
+			 textViewCartaRevivida = (TextView)findViewById(R.id.texto_karuta8);
+		 }
+		
+		 //falta realizar a animacao de carta sendo revivida
+		 this.realizarAnimacaoCartaRevivida(imageViewCartaRevivida, textViewCartaRevivida, textoCartaRevivida);
+	 } 
+ }
+ 
+ private void realizarAnimacaoCartaRevivida(ImageView imageViewCartaRevivida, TextView textViewCartaRevivida, String textoCartaRevivida)
+ {
+	 final AnimationDrawable animacaoReviveCarta = new AnimationDrawable();
+	 final TextView textViewCartaRevividaFinal = textViewCartaRevivida;
+	 final String textoCartaRevividaFinal = textoCartaRevivida; 
+	 int idImagemKarutaRevive1 = getResources().getIdentifier("karutarevive1", "drawable", getPackageName());
+	 int idImagemKarutaRevive2 = getResources().getIdentifier("karutarevive2", "drawable", getPackageName());
+	 int idImagemKarutaRevive3 = getResources().getIdentifier("karutarevive3", "drawable", getPackageName());
+	 int idImagemKarutaVazia = getResources().getIdentifier("karutavazia", "drawable", getPackageName());
+	 
+	 animacaoReviveCarta.addFrame(getResources().getDrawable(idImagemKarutaRevive1), 200);
+	 animacaoReviveCarta.addFrame(getResources().getDrawable(idImagemKarutaRevive2), 200);
+	 animacaoReviveCarta.addFrame(getResources().getDrawable(idImagemKarutaRevive3), 200);
+	 animacaoReviveCarta.addFrame(getResources().getDrawable(idImagemKarutaVazia), 200);
+	 
+	 animacaoReviveCarta.setOneShot(true);
+	 imageViewCartaRevivida.setImageDrawable(animacaoReviveCarta);
+	 
+	 super.reproduzirSfx("reviver_carta");
+	 
+	 imageViewCartaRevivida.post(new Runnable() {
+		@Override
+		public void run() {
+			animacaoReviveCarta.start();
+		}
+	 	});
+	 
+	 new Timer().schedule(new TimerTask() 
+	 { 
+		    @Override
+		    public void run() 
+		    {
+		        //If you want to operate UI modifications, you must run ui stuff on UiThread.
+		        TelaInicialMultiplayer.this.runOnUiThread(new Runnable() 
+		        {
+		            @Override
+		            public void run() 
+		            {
+		       		  //FALTA TORNAR A CARTA CLICAVEL E AS OUTRAS NAO. posso fazer isso com a funcao abaixo
+		       		  terminouEsperaUsuarioErrouCarta();
+		       		  textViewCartaRevividaFinal.setText(textoCartaRevividaFinal);
+		            }
+		        });
+		    }
+		}, 1000);
+ }
+ 
+ /*a mascote fala a frase por 4 segundos e depois volta a fala anterior*/
+ private void mascoteFalaFrasePor4Segundos(String fraseFalarPor4Segundos, String fraseAnterior)
+ {
+	 final TextView textViewFalaMascote = (TextView) findViewById(R.id.dica_kanji);
+	 textViewFalaMascote.setText(fraseFalarPor4Segundos);
+	 
+	 final String fraseAnteriorFinal = fraseAnterior;
+	 new Timer().schedule(new TimerTask() 
+	 { 
+		    @Override
+		    public void run() 
+		    {
+		        //If you want to operate UI modifications, you must run ui stuff on UiThread.
+		        TelaInicialMultiplayer.this.runOnUiThread(new Runnable() 
+		        {
+		            @Override
+		            public void run() 
+		            {
+		            	textViewFalaMascote.setText(fraseAnteriorFinal);
+		            }
+		        });
+		    }
+		}, 4000);
  }
  
  @Override
@@ -3730,5 +4171,6 @@ private void solicitarPorKanjisPraTreino() {
  {
 	 this.loadingComecoDaPartida = ProgressDialog.show(TelaInicialMultiplayer.this, getResources().getString(R.string.iniciandoJogo), getResources().getString(R.string.por_favor_aguarde));
  }
+ 
  
 }

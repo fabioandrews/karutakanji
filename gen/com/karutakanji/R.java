@@ -306,57 +306,61 @@ containing a value of this type.
         public static final int common_signin_btn_text_pressed_light=0x7f020019;
         public static final int doisx=0x7f02001a;
         public static final int dojobackground=0x7f02001b;
-        public static final int escolhaumacartatrovao=0x7f02001c;
-        public static final int heart=0x7f02001d;
-        public static final int ic_launcher=0x7f02001e;
-        public static final int ic_plusone_medium_off_client=0x7f02001f;
-        public static final int ic_plusone_small_off_client=0x7f020020;
-        public static final int ic_plusone_standard_off_client=0x7f020021;
-        public static final int ic_plusone_tall_off_client=0x7f020022;
-        public static final int karuta=0x7f020023;
-        public static final int karutapoof1=0x7f020024;
-        public static final int karutapoof2=0x7f020025;
-        public static final int karutapoof3=0x7f020026;
-        public static final int karutapoof4=0x7f020027;
-        public static final int karutatrovao1=0x7f020028;
-        public static final int karutatrovao2=0x7f020029;
-        public static final int karutatrovao3=0x7f02002a;
-        public static final int karutatrovao4=0x7f02002b;
-        public static final int karutavazia=0x7f02002c;
-        public static final int karutax=0x7f02002d;
-        public static final int kimonogirl=0x7f02002e;
-        public static final int macete_akachan_bebe=0x7f02002f;
-        public static final int macete_akemasu_abrir=0x7f020030;
-        public static final int macete_atama_cabeca=0x7f020031;
-        public static final int macete_hakobimasu_carregar=0x7f020032;
-        public static final int macete_hikimasu_puxar=0x7f020033;
-        public static final int macete_ijou_acima=0x7f020034;
-        public static final int macete_ika_abaixo=0x7f020035;
-        public static final int macete_kao_face=0x7f020036;
-        public static final int macete_kimasu_vestir=0x7f020037;
-        public static final int macete_kyuuni_subitamente=0x7f020038;
-        public static final int macete_mijikai_curto=0x7f020039;
-        public static final int macete_ocha_cha=0x7f02003a;
-        public static final int macete_okimasu_acordar=0x7f02003b;
-        public static final int macete_okurimasu_enviar=0x7f02003c;
-        public static final int macete_suki_gostar=0x7f02003d;
-        public static final int macete_tomeru_parar=0x7f02003e;
-        public static final int macete_tsuyoi_forte=0x7f02003f;
-        public static final int misturarcartas=0x7f020040;
-        public static final int mudardica=0x7f020041;
-        public static final int nenhumitem=0x7f020042;
-        public static final int nihonball=0x7f020043;
-        public static final int noveatedezesseiscartas=0x7f020044;
-        public static final int oitocartas=0x7f020045;
-        public static final int parartempo=0x7f020046;
-        public static final int parartempopequeno=0x7f020047;
-        public static final int revivecarta=0x7f020048;
-        public static final int segundamao=0x7f020049;
-        public static final int setadireita=0x7f02004a;
-        public static final int setaesquerda=0x7f02004b;
-        public static final int todasdonivel=0x7f02004c;
-        public static final int trovaotiracarta=0x7f02004d;
-        public static final int trovaotiracartaaleatoria=0x7f02004e;
+        public static final int escolhaumacartarevive=0x7f02001c;
+        public static final int escolhaumacartatrovao=0x7f02001d;
+        public static final int heart=0x7f02001e;
+        public static final int ic_launcher=0x7f02001f;
+        public static final int ic_plusone_medium_off_client=0x7f020020;
+        public static final int ic_plusone_small_off_client=0x7f020021;
+        public static final int ic_plusone_standard_off_client=0x7f020022;
+        public static final int ic_plusone_tall_off_client=0x7f020023;
+        public static final int karuta=0x7f020024;
+        public static final int karutapoof1=0x7f020025;
+        public static final int karutapoof2=0x7f020026;
+        public static final int karutapoof3=0x7f020027;
+        public static final int karutapoof4=0x7f020028;
+        public static final int karutarevive1=0x7f020029;
+        public static final int karutarevive2=0x7f02002a;
+        public static final int karutarevive3=0x7f02002b;
+        public static final int karutatrovao1=0x7f02002c;
+        public static final int karutatrovao2=0x7f02002d;
+        public static final int karutatrovao3=0x7f02002e;
+        public static final int karutatrovao4=0x7f02002f;
+        public static final int karutavazia=0x7f020030;
+        public static final int karutax=0x7f020031;
+        public static final int kimonogirl=0x7f020032;
+        public static final int macete_akachan_bebe=0x7f020033;
+        public static final int macete_akemasu_abrir=0x7f020034;
+        public static final int macete_atama_cabeca=0x7f020035;
+        public static final int macete_hakobimasu_carregar=0x7f020036;
+        public static final int macete_hikimasu_puxar=0x7f020037;
+        public static final int macete_ijou_acima=0x7f020038;
+        public static final int macete_ika_abaixo=0x7f020039;
+        public static final int macete_kao_face=0x7f02003a;
+        public static final int macete_kimasu_vestir=0x7f02003b;
+        public static final int macete_kyuuni_subitamente=0x7f02003c;
+        public static final int macete_mijikai_curto=0x7f02003d;
+        public static final int macete_ocha_cha=0x7f02003e;
+        public static final int macete_okimasu_acordar=0x7f02003f;
+        public static final int macete_okurimasu_enviar=0x7f020040;
+        public static final int macete_suki_gostar=0x7f020041;
+        public static final int macete_tomeru_parar=0x7f020042;
+        public static final int macete_tsuyoi_forte=0x7f020043;
+        public static final int misturarcartas=0x7f020044;
+        public static final int mudardica=0x7f020045;
+        public static final int nenhumitem=0x7f020046;
+        public static final int nihonball=0x7f020047;
+        public static final int noveatedezesseiscartas=0x7f020048;
+        public static final int oitocartas=0x7f020049;
+        public static final int parartempo=0x7f02004a;
+        public static final int parartempopequeno=0x7f02004b;
+        public static final int revivecarta=0x7f02004c;
+        public static final int segundamao=0x7f02004d;
+        public static final int setadireita=0x7f02004e;
+        public static final int setaesquerda=0x7f02004f;
+        public static final int todasdonivel=0x7f020050;
+        public static final int trovaotiracarta=0x7f020051;
+        public static final int trovaotiracartaaleatoria=0x7f020052;
     }
     public static final class id {
         public static final int action_settings=0x7f06008a;
@@ -533,10 +537,13 @@ containing a value of this type.
     public static final class raw {
         public static final int cartoon_hop=0x7f040000;
         public static final int correct_sound=0x7f040001;
-        public static final int radiate=0x7f040002;
-        public static final int single_lightning_bolt=0x7f040003;
-        public static final int small_group_of_american_children_shout_hooray_=0x7f040004;
-        public static final int time_to_unwind=0x7f040005;
+        public static final int magic_spell_trick_sound_001=0x7f040002;
+        public static final int nice_playing_harp=0x7f040003;
+        public static final int radiate=0x7f040004;
+        public static final int single_lightning_bolt=0x7f040005;
+        public static final int small_group_of_american_children_shout_hooray_=0x7f040006;
+        public static final int tick_tock_sound_effect_from_www_soundbyter_com=0x7f040007;
+        public static final int time_to_unwind=0x7f040008;
     }
     public static final class string {
         public static final int accept_popup_invite=0x7f070032;
@@ -568,8 +575,8 @@ containing a value of this type.
          */
         public static final int auth_client_using_bad_version_title=0x7f070014;
         public static final int aviso_ultimos_kanjis_modo_treinamento=0x7f070068;
-        public static final int botao_comprar_item_loja=0x7f0700a1;
-        public static final int botao_visualizar_macete=0x7f07009f;
+        public static final int botao_comprar_item_loja=0x7f0700a4;
+        public static final int botao_visualizar_macete=0x7f0700a2;
         public static final int carregando_dados_das_partidas=0x7f070073;
         public static final int carregando_kanjis_remotamente=0x7f070043;
         public static final int categorias=0x7f070075;
@@ -647,7 +654,7 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f070013;
         public static final int contagem_kanjis=0x7f070044;
-        public static final int credito_insuficiente=0x7f0700a0;
+        public static final int credito_insuficiente=0x7f0700a3;
         public static final int dados_da_partida=0x7f070077;
         public static final int dados_partidas_anteriores=0x7f07006e;
         public static final int data_da_partida=0x7f070078;
@@ -662,6 +669,8 @@ containing a value of this type.
         public static final int empatou=0x7f07006d;
         public static final int enviar_mensagem=0x7f07005f;
         public static final int erroEscolherCategorias=0x7f070042;
+        public static final int erro_mudar_dica=0x7f070098;
+        public static final int erro_reviver_carta=0x7f07009a;
         public static final int error=0x7f070038;
         public static final int escolha_a_duracao=0x7f070046;
         public static final int esperandoDecidirCategoria=0x7f07003f;
@@ -685,11 +694,11 @@ containing a value of this type.
         public static final int is_inviting_you=0x7f07003b;
         public static final int item=0x7f07004e;
         public static final int label_adversario=0x7f070074;
-        public static final int label_bebe=0x7f07009c;
-        public static final int label_cabeca=0x7f07009d;
-        public static final int label_cha=0x7f07009b;
-        public static final int label_dinheiro=0x7f070099;
-        public static final int label_mao=0x7f07009a;
+        public static final int label_bebe=0x7f07009f;
+        public static final int label_cabeca=0x7f0700a0;
+        public static final int label_cha=0x7f07009e;
+        public static final int label_dinheiro=0x7f07009c;
+        public static final int label_mao=0x7f07009d;
         /**  Location client code resources (prefix with location_client) 
          */
         public static final int location_client_powered_by_google=0x7f07001a;
@@ -718,9 +727,10 @@ containing a value of this type.
         public static final int mensagem_trovao_tira_carta_tira_dica=0x7f07005a;
         public static final int menu_principal=0x7f070061;
         public static final int modo_treinamento=0x7f070062;
-        public static final int moeda_do_jogo=0x7f07009e;
+        public static final int moeda_do_jogo=0x7f0700a1;
         public static final int nivel=0x7f070066;
         public static final int observacao_mais_uma_carta=0x7f070069;
+        public static final int palavra_esta_mudando=0x7f070099;
         public static final int palavrasAcertadas=0x7f07007c;
         public static final int palavrasErradas=0x7f07007d;
         public static final int palavrasTreinadas=0x7f07007b;
@@ -742,7 +752,7 @@ containing a value of this type.
         public static final int single_player_explanation=0x7f07002a;
         public static final int suaPontuacao=0x7f07005c;
         public static final int tempo_restante=0x7f07004b;
-        public static final int texto_ganhou=0x7f0700a2;
+        public static final int texto_ganhou=0x7f0700a5;
         public static final int texto_karuta1=0x7f070050;
         public static final int texto_karuta2=0x7f070051;
         public static final int texto_karuta3=0x7f070052;
@@ -751,7 +761,7 @@ containing a value of this type.
         public static final int texto_karuta6=0x7f070055;
         public static final int texto_karuta7=0x7f070056;
         public static final int texto_karuta8=0x7f070057;
-        public static final int texto_na_partida=0x7f0700a3;
+        public static final int texto_na_partida=0x7f0700a6;
         public static final int title_activity_dados_partidas_anteriores=0x7f07006f;
         public static final int title_activity_escolha_adificuldade=0x7f070024;
         public static final int title_activity_lojinha_macete_kanji=0x7f070096;
@@ -767,7 +777,7 @@ containing a value of this type.
         public static final int titulo_escolha_categoria=0x7f070040;
         /**  da lojinha 
          */
-        public static final int titulo_lojinha=0x7f070098;
+        public static final int titulo_lojinha=0x7f07009b;
         public static final int treinamento=0x7f070064;
         public static final int treinarNovamente=0x7f070084;
         public static final int tres_rodadas=0x7f070049;

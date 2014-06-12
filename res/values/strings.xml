@@ -123,6 +123,9 @@
     <string name="macete_tsuyoi_forte">Do lado esquerdo, há uma barra de metal entortada. Do lado direito, há dois braços musculosos fazendo sinal de "OK" e um kanji de "no meio de" no meio deles. Só mesmo sendo muito forte para entortar uma barra de metal</string>
     <string name="title_activity_lojinha_macete_kanji">LojinhaMaceteKanjiActivity</string>
     <string name="title_activity_ver_macete_kanji">VerMaceteKanjiActivity</string>
+    <string name="erro_mudar_dica">Esta é a última dica da rodada, por isso o item não fez nada</string>
+    <string name="palavra_esta_mudando">A palavra está mudando...</string>
+    <string name="erro_reviver_carta">Você não pode reviver essa carta. Você perdeu o item!</string>
     
     <!-- da lojinha -->
     <string name="titulo_lojinha">Lojinha</string>

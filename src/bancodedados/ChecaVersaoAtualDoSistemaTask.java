@@ -29,8 +29,8 @@ public class ChecaVersaoAtualDoSistemaTask extends AsyncTask<String, String, Voi
 	{
 		try
 		{
-			//String url = "http://server.karutakanji.pairg.dimap.ufrn.br/app/pegarversaodosistemaatual.php";
-			String url = "http://192.168.0.110/amit/pegarversaodosistemaatual.php";
+			String url = "http://server.karutakanji.pairg.dimap.ufrn.br/app/pegarversaodosistemaatual.php";
+			//String url = "http://192.168.0.110/amit/pegarversaodosistemaatual.php";
 			HttpClient httpclient = new DefaultHttpClient();  
 		    HttpPost httppost = new HttpPost(url);   
 		    HttpResponse response = httpclient.execute(httppost); 

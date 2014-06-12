@@ -51,7 +51,9 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 			soundIds[1] = soundPool.load(getApplicationContext(), R.raw.cartoon_hop, 1);
 			//soundIds[2] = soundPool.load(getApplicationContext(), R.raw.small_group_of_american_children_shout_hooray_, 1);
 			soundIds[2] = soundPool.load(getApplicationContext(), R.raw.single_lightning_bolt, 1);
-			
+			soundIds[3] =soundPool.load(getApplicationContext(), R.raw.tick_tock_sound_effect_from_www_soundbyter_com, 1);
+			soundIds[4] = soundPool.load(getApplicationContext(), R.raw.magic_spell_trick_sound_001, 1);		
+			soundIds[5] = soundPool.load(getApplicationContext(), R.raw.nice_playing_harp, 1);
 			//embaixo, bote os seus botoes q vc quer que o usuario possa clicar e lancar o sfx
 			//LEMBRAR: CHAMAR SUPER.ONCREATE() SÓ DEPOIS DE SETCONTENTVIEW NA SUBCLASSE!
 			
@@ -82,6 +84,18 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 		{
 			//algum usuario usou o item do trovao aleatorio ou trovao acerta uma carta
 			this.tocarSom(soundIds[2]);
+		}
+		else if(qualEfeitoSonoro.compareTo("parar_tempo") == 0)
+		{
+			this.tocarSom(soundIds[3]);
+		}
+		else if(qualEfeitoSonoro.compareTo("mudar_dica") == 0)
+		{
+			this.tocarSom(soundIds[4]);
+		}
+		else if(qualEfeitoSonoro.compareTo("reviver_carta") == 0)
+		{
+			this.tocarSom(soundIds[5]);
 		}
 	}
 	

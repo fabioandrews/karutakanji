@@ -52,8 +52,8 @@ public class EnviarDadosDaPartidaParaLogTask extends AsyncTask<DadosPartidaParaO
 		String emailadversario = umDadosPartida.geteMailAdversario();
 		String voceganhououperdeu = umDadosPartida.getVoceGanhouOuPerdeu();
 		
-		//String url_select = "http://server.karutakanji.pairg.dimap.ufrn.br/app/inserirpartidanolog.php";//android nao aceita localhost, tem de ser seu IP
-		String url_select = "http://192.168.0.110/amit/inserirpartidanolog.php";//android nao aceita localhost, tem de ser seu IP
+		String url_select = "http://server.karutakanji.pairg.dimap.ufrn.br/app/inserirpartidanolog.php";//android nao aceita localhost, tem de ser seu IP
+		//String url_select = "http://192.168.0.110/amit/inserirpartidanolog.php";//android nao aceita localhost, tem de ser seu IP
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		
 		try
