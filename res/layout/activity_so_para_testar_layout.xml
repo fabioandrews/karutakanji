@@ -9,32 +9,41 @@
     android:id="@+id/idqualquersotestarlayout"
     tools:context=".MainActivity"
     android:gravity="center_horizontal" >
-
-    
-<TextView
+<LinearLayout
+    android:id="@+id/pontuacaoEMaisPontos"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:orientation="horizontal" >
+	<TextView
         android:id="@+id/pontuacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/pontuacao" />
-
+        android:text="@string/pontuacao"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_gravity="center" />
+	<ImageView
+        android:id="@+id/maispontos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/animacao10_1" />
+	<ImageView
+        android:id="@+id/doisxpequeno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/doisxpequeno" />
+	</LinearLayout>
     <TextView
         android:id="@+id/rodada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/pontuacao"
-        android:layout_below="@+id/pontuacao"
+        android:layout_alignLeft="@+id/pontuacaoEMaisPontos"
+        android:layout_below="@+id/pontuacaoEMaisPontos"
         android:text="@string/rodada" />
     
-    <ImageView
-        android:id="@+id/item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/label_item"
-        android:layout_toRightOf="@+id/label_item"
-        android:src="@drawable/nenhumitem" />
-
     <TextView
         android:id="@+id/tempo"
         android:layout_width="wrap_content"
@@ -42,21 +51,36 @@
         android:layout_alignLeft="@+id/rodada"
         android:layout_below="@+id/rodada"
         android:text="@string/tempo_restante" />
-
+    
+    <LinearLayout
+    android:id="@+id/item_e_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/pontuacaoEMaisPontos"
+    android:layout_below="@+id/tempo"
+    android:orientation="horizontal" >
     <TextView
         android:id="@+id/label_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/pontuacao"
-        android:layout_below="@+id/tempo"
-        android:text="@string/item" />
+        android:text="@string/item"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_gravity="center" />
+    <ImageView
+        android:id="@+id/item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/nenhumitem" />
+
+    </LinearLayout>
 
     <RelativeLayout  android:id="@+id/dica_kanji_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/label_item"
+        android:layout_alignBottom="@+id/item_e_label"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/pontuacao">
+        android:layout_alignTop="@+id/pontuacaoEMaisPontos">
 
     <ImageView
         android:id="@+id/balao_fala"
@@ -262,7 +286,6 @@
                 android:textStyle="bold" />
         </RelativeLayout>
     </RelativeLayout>
-
     <ImageView
         android:id="@+id/parartempopequeno"
         android:layout_width="wrap_content"
@@ -270,5 +293,7 @@
         android:layout_alignTop="@+id/tempo"
         android:layout_toRightOf="@+id/tempo"
         android:src="@drawable/parartempopequeno" />
+       
+
 
 </RelativeLayout>

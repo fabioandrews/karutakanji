@@ -24,12 +24,15 @@ import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.PorterDuff;
 
-public class MainActivity extends ActivityDoJogoComSom 
+public class MainActivity extends ActivityDoJogoComSom implements View.OnClickListener
 {
 	private ChecaVersaoAtualDoSistemaTask checaVersaoAtual;
 	final static int[] SCREENS = {R.id.telaatualizeojogo, R.id.telainicialnormal};
@@ -43,6 +46,9 @@ public class MainActivity extends ActivityDoJogoComSom
 		switchToScreen(R.id.telainicialnormal);
 		this.checaVersaoAtual = new ChecaVersaoAtualDoSistemaTask(this);
 		this.checaVersaoAtual.execute("");
+		
+		ImageView imageViewCarta = (ImageView) findViewById(R.id.imageView2);
+		imageViewCarta.setOnClickListener(this);
 	}
 
 	@Override
@@ -172,5 +178,17 @@ public class MainActivity extends ActivityDoJogoComSom
 	{
 		Toast t = Toast.makeText(this, erro, Toast.LENGTH_LONG);
 	    t.show();
+	}
+
+	@Override
+	public void onClick(View v) 
+	{
+		switch (v.getId()) 
+		{
+	    	case R.id.imageView2:
+	    		ImageView imageViewCarta = (ImageView) findViewById(R.id.imageView2);
+	    		imageViewCarta.setColorFilter(Color.rgb(123, 123, 123), android.graphics.PorterDuff.Mode.MULTIPLY);
+	    	break;
+		}
 	}
 }

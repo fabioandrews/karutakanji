@@ -144,6 +144,7 @@ private LinkedList<String> itensDoGanhador;
 private ImageView cartaASerTirada; //na hora que o item do trovao for usado, precisaremos armazenar algo nesse atributo so p passar p outra funcao
 private boolean usouTrovaoTiraCarta; //booleano que diz se o usuario usou o item trovaotiracarta
 private boolean usouReviveCarta; //booleano que diz se o usuario usou o item revivecarta
+private boolean usou2x; //booleano que diz se o usuario usou o item 2x
 
 public boolean guestTerminouDeCarregarListaDeCategorias; //booleano para resolver problema de um dos jogadores nao estar recebendo a lista de categorias
 private Handler mHandler = new Handler(); //handler para o chat do final do jogo
@@ -268,7 +269,7 @@ switch (v.getId()) {
     	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta1 = (TextView) findViewById(R.id.texto_karuta1);
-        	String textoKaruta1 = textViewKaruta1.getText().toString();
+        	String textoKaruta1 = this.kanjisDasCartasNaTela.get(0).getKanji();
         	String textoKanjiDaDica = this.kanjiDaDica.getKanji();
         	
         	if(textoKaruta1.compareTo(textoKanjiDaDica) == 0)
@@ -281,7 +282,7 @@ switch (v.getId()) {
         		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta1 = (ImageView) findViewById(R.id.karuta1_imageview);
-        		imageViewKaruta1.setImageResource(R.drawable.karutax); //mudei a figura da carta
+        		this.fazerImageViewFicarEscuro(imageViewKaruta1); //mudei a figura da carta
         		findViewById(R.id.karuta1).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
         		textViewKaruta1.setText("");
         		this.alertarAoAdversarioQueACartaNaoEhMaisClicavel("karuta1");
@@ -337,7 +338,7 @@ switch (v.getId()) {
     	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta2 = (TextView) findViewById(R.id.texto_karuta2);
-        	String textoKaruta2 = textViewKaruta2.getText().toString();
+        	String textoKaruta2 = this.kanjisDasCartasNaTela.get(1).getKanji();
         	String textoKanjiDaDica2 = this.kanjiDaDica.getKanji();
         	
         	if(textoKaruta2.compareTo(textoKanjiDaDica2) == 0)
@@ -350,7 +351,7 @@ switch (v.getId()) {
         		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta2 = (ImageView) findViewById(R.id.karuta2_imageview);
-        		imageViewKaruta2.setImageResource(R.drawable.karutax); //mudei a figura da carta
+        		this.fazerImageViewFicarEscuro(imageViewKaruta2); //mudei a figura da carta
         		findViewById(R.id.karuta2).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
         		textViewKaruta2.setText("");
         		this.alertarAoAdversarioQueACartaNaoEhMaisClicavel("karuta2");
@@ -404,7 +405,7 @@ switch (v.getId()) {
     	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta3 = (TextView) findViewById(R.id.texto_karuta3);
-        	String textoKaruta3 = textViewKaruta3.getText().toString();
+        	String textoKaruta3 = this.kanjisDasCartasNaTela.get(2).getKanji();
         	String textoKanjiDaDica3 = this.kanjiDaDica.getKanji();
         	
         	if(textoKaruta3.compareTo(textoKanjiDaDica3) == 0)
@@ -417,7 +418,7 @@ switch (v.getId()) {
         		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta3 = (ImageView) findViewById(R.id.karuta3_imageview);
-        		imageViewKaruta3.setImageResource(R.drawable.karutax); //mudei a figura da carta
+        		this.fazerImageViewFicarEscuro(imageViewKaruta3); //mudei a figura da carta
         		findViewById(R.id.karuta3).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
         		textViewKaruta3.setText("");
         		this.alertarAoAdversarioQueACartaNaoEhMaisClicavel("karuta3");
@@ -471,7 +472,7 @@ switch (v.getId()) {
     	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta4 = (TextView) findViewById(R.id.texto_karuta4);
-        	String textoKaruta4 = textViewKaruta4.getText().toString();
+        	String textoKaruta4 = this.kanjisDasCartasNaTela.get(3).getKanji();
         	String textoKanjiDaDica4 = this.kanjiDaDica.getKanji();
         	
         	if(textoKaruta4.compareTo(textoKanjiDaDica4) == 0)
@@ -484,7 +485,7 @@ switch (v.getId()) {
         		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta4 = (ImageView) findViewById(R.id.karuta4_imageview);
-        		imageViewKaruta4.setImageResource(R.drawable.karutax); //mudei a figura da carta
+        		this.fazerImageViewFicarEscuro(imageViewKaruta4); //mudei a figura da carta
         		findViewById(R.id.karuta4).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
         		textViewKaruta4.setText("");
         		this.alertarAoAdversarioQueACartaNaoEhMaisClicavel("karuta4");
@@ -538,7 +539,7 @@ switch (v.getId()) {
     	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta5 = (TextView) findViewById(R.id.texto_karuta5);
-        	String textoKaruta5 = textViewKaruta5.getText().toString();
+        	String textoKaruta5 = this.kanjisDasCartasNaTela.get(4).getKanji();
         	String textoKanjiDaDica5 = this.kanjiDaDica.getKanji();
         	
         	if(textoKaruta5.compareTo(textoKanjiDaDica5) == 0)
@@ -551,7 +552,7 @@ switch (v.getId()) {
         		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta5 = (ImageView) findViewById(R.id.karuta5_imageview);
-        		imageViewKaruta5.setImageResource(R.drawable.karutax); //mudei a figura da carta
+        		this.fazerImageViewFicarEscuro(imageViewKaruta5); //mudei a figura da carta
         		findViewById(R.id.karuta5).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
         		textViewKaruta5.setText("");
         		this.alertarAoAdversarioQueACartaNaoEhMaisClicavel("karuta5");
@@ -605,7 +606,7 @@ switch (v.getId()) {
     	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta6 = (TextView) findViewById(R.id.texto_karuta6);
-        	String textoKaruta6 = textViewKaruta6.getText().toString();
+        	String textoKaruta6 = this.kanjisDasCartasNaTela.get(5).getKanji();
         	String textoKanjiDaDica6 = this.kanjiDaDica.getKanji();
         	
         	if(textoKaruta6.compareTo(textoKanjiDaDica6) == 0)
@@ -618,7 +619,7 @@ switch (v.getId()) {
         		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta6 = (ImageView) findViewById(R.id.karuta6_imageview);
-        		imageViewKaruta6.setImageResource(R.drawable.karutax); //mudei a figura da carta
+        		this.fazerImageViewFicarEscuro(imageViewKaruta6); //mudei a figura da carta
         		findViewById(R.id.karuta6).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
         		textViewKaruta6.setText("");
         		this.alertarAoAdversarioQueACartaNaoEhMaisClicavel("karuta6");
@@ -672,7 +673,7 @@ switch (v.getId()) {
     	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta7 = (TextView) findViewById(R.id.texto_karuta7);
-        	String textoKaruta7 = textViewKaruta7.getText().toString();
+        	String textoKaruta7 = this.kanjisDasCartasNaTela.get(6).getKanji();
         	String textoKanjiDaDica7 = this.kanjiDaDica.getKanji();
         	
         	if(textoKaruta7.compareTo(textoKanjiDaDica7) == 0)
@@ -685,7 +686,7 @@ switch (v.getId()) {
         		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta7 = (ImageView) findViewById(R.id.karuta7_imageview);
-        		imageViewKaruta7.setImageResource(R.drawable.karutax); //mudei a figura da carta
+        		this.fazerImageViewFicarEscuro(imageViewKaruta7); //mudei a figura da carta
         		findViewById(R.id.karuta7).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
         		textViewKaruta7.setText("");
         		this.alertarAoAdversarioQueACartaNaoEhMaisClicavel("karuta7");
@@ -739,7 +740,7 @@ switch (v.getId()) {
     	if(this.usouTrovaoTiraCarta == false && this.usouReviveCarta == false) //no caso do trovao e do revive, ele clica numa carta p elimina-la
     	{
     		TextView textViewKaruta8 = (TextView) findViewById(R.id.texto_karuta8);
-        	String textoKaruta8 = textViewKaruta8.getText().toString();
+        	String textoKaruta8 = this.kanjisDasCartasNaTela.get(7).getKanji();
         	String textoKanjiDaDica8 = this.kanjiDaDica.getKanji();
         	
         	if(textoKaruta8.compareTo(textoKanjiDaDica8) == 0)
@@ -752,7 +753,7 @@ switch (v.getId()) {
         		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta8 = (ImageView) findViewById(R.id.karuta8_imageview);
-        		imageViewKaruta8.setImageResource(R.drawable.karutax); //mudei a figura da carta
+        		this.fazerImageViewFicarEscuro(imageViewKaruta8); //mudei a figura da carta
         		findViewById(R.id.karuta8).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
         		textViewKaruta8.setText("");
         		this.alertarAoAdversarioQueACartaNaoEhMaisClicavel("karuta8");
@@ -817,23 +818,251 @@ switch (v.getId()) {
 private void aumentarPontuacaoComBaseNaDificuldadeDoKanji()
 {
 	int dificuldade = this.kanjiDaDica.getDificuldadeDoKanji();
-	
-	if(dificuldade == 1)
+	if(this.usou2x == false)
 	{
-		this.suaPontuacao = this.suaPontuacao + 10;
-	}
-	else if(dificuldade == 2)
-	{
-		this.suaPontuacao = this.suaPontuacao + 20;
+		if(dificuldade == 1)
+		{
+			this.suaPontuacao = this.suaPontuacao + 10;
+			this.realizarAnimacaoAumentaPontuacao(1,false);
+			
+		}
+		else if(dificuldade == 2)
+		{
+			this.suaPontuacao = this.suaPontuacao + 20;
+			this.realizarAnimacaoAumentaPontuacao(2,false);
+		}
+		else
+		{
+			this.suaPontuacao = this.suaPontuacao + 30;
+			this.realizarAnimacaoAumentaPontuacao(3,false);
+		}
 	}
 	else
 	{
-		this.suaPontuacao = this.suaPontuacao + 30;
+		//usuario usou o item 2x. As animacoes sao diferentes
+		if(dificuldade == 1)
+		{
+			this.suaPontuacao = this.suaPontuacao + 20;
+			this.realizarAnimacaoAumentaPontuacao(1,true);
+		}
+		else if(dificuldade == 2)
+		{
+			this.suaPontuacao = this.suaPontuacao + 40;
+			this.realizarAnimacaoAumentaPontuacao(2,true);
+		}
+		else
+		{
+			this.suaPontuacao = this.suaPontuacao + 30;
+			this.realizarAnimacaoAumentaPontuacao(3,true);
+		}
+		
+		findViewById(R.id.doisxpequeno).setVisibility(View.INVISIBLE);
+		//AINDA FALTA MUDAR O BOOLEANO, MAS ALTERAMOS ELE QUANDO O ADVERSARIO SABE Q O USUARIO ACERTOU COM MAIS PONTOS
 	}
+}
+
+private void realizarAnimacaoAumentaPontuacao(int dificuldadeDoKanji, boolean eh2x)
+{
+	final AnimationDrawable animacaoAumentaPontuacao = new AnimationDrawable(); 
+	int idImagemAnimacaoAumentaPontos1 = 0;
+	int idImagemAnimacaoAumentaPontos2 = 0;
+	int idImagemAnimacaoAumentaPontos3 = 0;
+	int idImagemAnimacaoAumentaPontos4 = 0;
+	int idImagemAnimacaoAumentaPontos5 = 0;
+	int idImagemAnimacaoAumentaPontos6 = 0;
+	int idImagemAnimacaoAumentaPontos7 = 0;
+	int idImagemAnimacaoAumentaPontos8 = 0;
+	int idImagemAnimacaoAumentaPontos9 = 0;
+	int idImagemAnimacaoAumentaPontos10 = 0;
+	int idImagemAnimacaoAumentaPontos11 = 0;
+	int idImagemAnimacaoAumentaPontos12 = 0;
+	int idImagemAnimacaoAumentaPontos13 = 0;
+	int idImagemAnimacaoAumentaPontos14 = 0;
+	int idImagemAnimacaoAumentaPontos15 = 0;
+	int idImagemAnimacaoAumentaPontos16 = 0;
+	int idImagemAnimacaoAumentaPontos17 = 0;
 	
-	TextView textoPontuacao = (TextView) findViewById(R.id.pontuacao);
-	String pontuacao = getResources().getString(R.string.pontuacao);
-	textoPontuacao.setText(pontuacao + String.valueOf(this.suaPontuacao));
+	
+	if(dificuldadeDoKanji == 1 && eh2x == false)
+	{
+		idImagemAnimacaoAumentaPontos1 = getResources().getIdentifier("animacao10_1", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos2 = getResources().getIdentifier("animacao10_2", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos3 = getResources().getIdentifier("animacao10_3", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos4 = getResources().getIdentifier("animacao10_4", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos5 = getResources().getIdentifier("animacao10_5", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos6 = getResources().getIdentifier("animacao10_6", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos7 = getResources().getIdentifier("animacao10_7", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos8 = getResources().getIdentifier("animacao10_8", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos9 = getResources().getIdentifier("animacao10_9", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos10 = getResources().getIdentifier("animacao10_10", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos11 = getResources().getIdentifier("animacao10_11", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos12 = getResources().getIdentifier("animacao10_12", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos13 = getResources().getIdentifier("animacao10_13", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos14 = getResources().getIdentifier("animacao10_14", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos15 = getResources().getIdentifier("animacao10_15", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos16 = getResources().getIdentifier("animacao10_16", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos17 = getResources().getIdentifier("animacao10_17", "drawable", getPackageName());
+	}
+	else if(dificuldadeDoKanji == 2 && eh2x == false)
+	{
+		idImagemAnimacaoAumentaPontos1 = getResources().getIdentifier("animacao20_1", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos2 = getResources().getIdentifier("animacao20_2", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos3 = getResources().getIdentifier("animacao20_3", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos4 = getResources().getIdentifier("animacao20_4", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos5 = getResources().getIdentifier("animacao20_5", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos6 = getResources().getIdentifier("animacao20_6", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos7 = getResources().getIdentifier("animacao20_7", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos8 = getResources().getIdentifier("animacao20_8", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos9 = getResources().getIdentifier("animacao20_9", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos10 = getResources().getIdentifier("animacao20_10", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos11 = getResources().getIdentifier("animacao20_11", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos12 = getResources().getIdentifier("animacao20_12", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos13 = getResources().getIdentifier("animacao20_13", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos14 = getResources().getIdentifier("animacao20_14", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos15 = getResources().getIdentifier("animacao20_15", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos16 = getResources().getIdentifier("animacao20_16", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos17 = getResources().getIdentifier("animacao20_17", "drawable", getPackageName());
+	}
+	else if(dificuldadeDoKanji == 3 && eh2x == false)
+	{
+		idImagemAnimacaoAumentaPontos1 = getResources().getIdentifier("animacao30_1", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos2 = getResources().getIdentifier("animacao30_2", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos3 = getResources().getIdentifier("animacao30_3", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos4 = getResources().getIdentifier("animacao30_4", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos5 = getResources().getIdentifier("animacao30_5", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos6 = getResources().getIdentifier("animacao30_6", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos7 = getResources().getIdentifier("animacao30_7", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos8 = getResources().getIdentifier("animacao30_8", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos9 = getResources().getIdentifier("animacao30_9", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos10 = getResources().getIdentifier("animacao30_10", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos11 = getResources().getIdentifier("animacao30_11", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos12 = getResources().getIdentifier("animacao30_12", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos13 = getResources().getIdentifier("animacao30_13", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos14 = getResources().getIdentifier("animacao30_14", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos15 = getResources().getIdentifier("animacao30_15", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos16 = getResources().getIdentifier("animacao30_16", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos17 = getResources().getIdentifier("animacao30_17", "drawable", getPackageName());
+	}
+	else if(dificuldadeDoKanji == 1 && eh2x == true)
+	{
+		idImagemAnimacaoAumentaPontos1 = getResources().getIdentifier("doisxanimacao20_1", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos2 = getResources().getIdentifier("doisxanimacao20_2", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos3 = getResources().getIdentifier("doisxanimacao20_3", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos4 = getResources().getIdentifier("doisxanimacao20_4", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos5 = getResources().getIdentifier("doisxanimacao20_5", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos6 = getResources().getIdentifier("doisxanimacao20_6", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos7 = getResources().getIdentifier("doisxanimacao20_7", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos8 = getResources().getIdentifier("doisxanimacao20_8", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos9 = getResources().getIdentifier("doisxanimacao20_9", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos10 = getResources().getIdentifier("doisxanimacao20_10", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos11 = getResources().getIdentifier("doisxanimacao20_11", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos12 = getResources().getIdentifier("doisxanimacao20_12", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos13 = getResources().getIdentifier("doisxanimacao20_13", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos14 = getResources().getIdentifier("doisxanimacao20_14", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos15 = getResources().getIdentifier("doisxanimacao20_15", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos16 = getResources().getIdentifier("doisxanimacao20_16", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos17 = getResources().getIdentifier("doisxanimacao20_17", "drawable", getPackageName());
+	}
+	else if(dificuldadeDoKanji == 2 && eh2x == true)
+	{
+		idImagemAnimacaoAumentaPontos1 = getResources().getIdentifier("doisxanimacao40_1", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos2 = getResources().getIdentifier("doisxanimacao40_2", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos3 = getResources().getIdentifier("doisxanimacao40_3", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos4 = getResources().getIdentifier("doisxanimacao40_4", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos5 = getResources().getIdentifier("doisxanimacao40_5", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos6 = getResources().getIdentifier("doisxanimacao40_6", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos7 = getResources().getIdentifier("doisxanimacao40_7", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos8 = getResources().getIdentifier("doisxanimacao40_8", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos9 = getResources().getIdentifier("doisxanimacao40_9", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos10 = getResources().getIdentifier("doisxanimacao40_10", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos11 = getResources().getIdentifier("doisxanimacao40_11", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos12 = getResources().getIdentifier("doisxanimacao40_12", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos13 = getResources().getIdentifier("doisxanimacao40_13", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos14 = getResources().getIdentifier("doisxanimacao40_14", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos15 = getResources().getIdentifier("doisxanimacao40_15", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos16 = getResources().getIdentifier("doisxanimacao40_16", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos17 = getResources().getIdentifier("doisxanimacao40_17", "drawable", getPackageName());
+	}
+	else if(dificuldadeDoKanji == 3 && eh2x == true)
+	{
+		idImagemAnimacaoAumentaPontos1 = getResources().getIdentifier("doisxanimacao60_1", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos2 = getResources().getIdentifier("doisxanimacao60_2", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos3 = getResources().getIdentifier("doisxanimacao60_3", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos4 = getResources().getIdentifier("doisxanimacao60_4", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos5 = getResources().getIdentifier("doisxanimacao60_5", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos6 = getResources().getIdentifier("doisxanimacao60_6", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos7 = getResources().getIdentifier("doisxanimacao60_7", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos8 = getResources().getIdentifier("doisxanimacao60_8", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos9 = getResources().getIdentifier("doisxanimacao60_9", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos10 = getResources().getIdentifier("doisxanimacao60_10", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos11 = getResources().getIdentifier("doisxanimacao60_11", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos12 = getResources().getIdentifier("doisxanimacao60_12", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos13 = getResources().getIdentifier("doisxanimacao60_13", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos14 = getResources().getIdentifier("doisxanimacao60_14", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos15 = getResources().getIdentifier("doisxanimacao60_15", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos16 = getResources().getIdentifier("doisxanimacao60_16", "drawable", getPackageName());
+		idImagemAnimacaoAumentaPontos17 = getResources().getIdentifier("doisxanimacao60_17", "drawable", getPackageName());
+	} 
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos1), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos2), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos3), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos4), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos5), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos6), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos7), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos8), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos9), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos10), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos11), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos12), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos13), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos14), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos15), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos16), 50);
+	 animacaoAumentaPontuacao.addFrame(getResources().getDrawable(idImagemAnimacaoAumentaPontos17), 50);
+	 animacaoAumentaPontuacao.setOneShot(true);
+	 
+	 ImageView imageViewMaisPontos = (ImageView) findViewById(R.id.maispontos);
+	 imageViewMaisPontos.setImageDrawable(animacaoAumentaPontuacao);
+	 
+	 imageViewMaisPontos.post(new Runnable() {
+		@Override
+		public void run() {
+			animacaoAumentaPontuacao.start();
+		}
+	 	});
+	 
+	 if(usou2x == true)
+	 {
+		 super.reproduzirSfx("dois_x");
+	 }
+	 
+	 new Timer().schedule(new TimerTask() 
+	 { 
+		    @Override
+		    public void run() 
+		    {
+		        //If you want to operate UI modifications, you must run ui stuff on UiThread.
+		        TelaInicialMultiplayer.this.runOnUiThread(new Runnable() 
+		        {
+		            @Override
+		            public void run() 
+		            {
+		            	TextView textoPontuacao = (TextView) findViewById(R.id.pontuacao);
+		            	String pontuacao = getResources().getString(R.string.pontuacao);
+		            	
+		            	if(suaPontuacao < 100)
+		            	{
+		            		textoPontuacao.setText(pontuacao + "0" + String.valueOf(suaPontuacao));
+		            	}
+		            	else
+		            	{
+		            		textoPontuacao.setText(pontuacao + String.valueOf(suaPontuacao));
+		            	}
+		            }
+		        });
+		    }
+		}, 900);
 }
 
 void startQuickGame() {
@@ -1558,12 +1787,14 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 	else if(mensagem.contains("naoClicavel=") == true)
 	{
 		//alguem acertou uma carta e por isso essa carta nao deveria ser mais clicavel p ambos os jogadores
-		//ex: naoClicavel=karuta1
-		String karutaNaoClicavel = mensagem.replace("naoClicavel=", "");
+		//tb eh avisado se o adversario usou o 2x, ou seja, ganhou o dobro dos pontos ou nao
+		//ex: naoClicavel=karuta1;usou2x=false
+		String[] cartaNaoClicavelEUsou2x = mensagem.split(";");		
+		String karutaNaoClicavel = cartaNaoClicavelEUsou2x[0].replace("naoClicavel=", "");
 		if(karutaNaoClicavel.compareTo("karuta1") == 0)
 		{
 			ImageView imageViewKaruta1 = (ImageView) findViewById(R.id.karuta1_imageview);
-    		imageViewKaruta1.setImageResource(R.drawable.karutax); //mudei a figura da carta
+			this.fazerImageViewFicarEscuro(imageViewKaruta1); //mudei a figura da carta
     		findViewById(R.id.karuta1).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
     		TextView textViewKaruta1 = (TextView) findViewById(R.id.texto_karuta1);
     		textViewKaruta1.setText("");
@@ -1571,7 +1802,7 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		else if(karutaNaoClicavel.compareTo("karuta2") == 0)
 		{
 			ImageView imageViewKaruta2 = (ImageView) findViewById(R.id.karuta2_imageview);
-    		imageViewKaruta2.setImageResource(R.drawable.karutax); //mudei a figura da carta
+			this.fazerImageViewFicarEscuro(imageViewKaruta2); //mudei a figura da carta
     		findViewById(R.id.karuta2).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
     		TextView textViewKaruta2 = (TextView) findViewById(R.id.texto_karuta2);
     		textViewKaruta2.setText("");
@@ -1579,7 +1810,7 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		else if(karutaNaoClicavel.compareTo("karuta3") == 0)
 		{
 			ImageView imageViewKaruta3 = (ImageView) findViewById(R.id.karuta3_imageview);
-    		imageViewKaruta3.setImageResource(R.drawable.karutax); //mudei a figura da carta
+			this.fazerImageViewFicarEscuro(imageViewKaruta3); //mudei a figura da carta
     		findViewById(R.id.karuta3).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
     		TextView textViewKaruta3 = (TextView) findViewById(R.id.texto_karuta3);
     		textViewKaruta3.setText("");
@@ -1587,7 +1818,7 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		else if(karutaNaoClicavel.compareTo("karuta4") == 0)
 		{
 			ImageView imageViewKaruta4 = (ImageView) findViewById(R.id.karuta4_imageview);
-    		imageViewKaruta4.setImageResource(R.drawable.karutax); //mudei a figura da carta
+			this.fazerImageViewFicarEscuro(imageViewKaruta4); //mudei a figura da carta
     		findViewById(R.id.karuta4).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
     		TextView textViewKaruta4 = (TextView) findViewById(R.id.texto_karuta4);
     		textViewKaruta4.setText("");
@@ -1595,7 +1826,7 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		else if(karutaNaoClicavel.compareTo("karuta5") == 0)
 		{
 			ImageView imageViewKaruta5 = (ImageView) findViewById(R.id.karuta5_imageview);
-    		imageViewKaruta5.setImageResource(R.drawable.karutax); //mudei a figura da carta
+			this.fazerImageViewFicarEscuro(imageViewKaruta5); //mudei a figura da carta
     		findViewById(R.id.karuta5).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
     		TextView textViewKaruta5 = (TextView) findViewById(R.id.texto_karuta5);
     		textViewKaruta5.setText("");
@@ -1603,7 +1834,7 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		else if(karutaNaoClicavel.compareTo("karuta6") == 0)
 		{
 			ImageView imageViewKaruta6 = (ImageView) findViewById(R.id.karuta6_imageview);
-    		imageViewKaruta6.setImageResource(R.drawable.karutax); //mudei a figura da carta
+			this.fazerImageViewFicarEscuro(imageViewKaruta6); //mudei a figura da carta
     		findViewById(R.id.karuta6).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
     		TextView textViewKaruta6 = (TextView) findViewById(R.id.texto_karuta6);
     		textViewKaruta6.setText("");
@@ -1611,7 +1842,7 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		else if(karutaNaoClicavel.compareTo("karuta7") == 0)
 		{
 			ImageView imageViewKaruta7 = (ImageView) findViewById(R.id.karuta7_imageview);
-    		imageViewKaruta7.setImageResource(R.drawable.karutax); //mudei a figura da carta
+			this.fazerImageViewFicarEscuro(imageViewKaruta7); //mudei a figura da carta
     		findViewById(R.id.karuta7).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
     		TextView textViewKaruta7 = (TextView) findViewById(R.id.texto_karuta7);
     		textViewKaruta7.setText("");
@@ -1619,24 +1850,49 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		else if(karutaNaoClicavel.compareTo("karuta8") == 0)
 		{
 			ImageView imageViewKaruta8 = (ImageView) findViewById(R.id.karuta8_imageview);
-    		imageViewKaruta8.setImageResource(R.drawable.karutax); //mudei a figura da carta
+			this.fazerImageViewFicarEscuro(imageViewKaruta8); //mudei a figura da carta
     		findViewById(R.id.karuta8).setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
     		TextView textViewKaruta8 = (TextView) findViewById(R.id.texto_karuta8);
     		textViewKaruta8.setText("");
 		}
 		
 		//a cada X cartas que ja se foram do jogo, um item eh aleatoriamente gerado para cada um dos jogadores		
+		//se o adversario usou o item 2x, ele deve ganhar o dobro dos pontos
+		String usou2xEmString = cartaNaoClicavelEUsou2x[1].replace("usou2x=", "");
+		boolean usou2x = Boolean.valueOf(usou2xEmString);
+		
 		if(this.kanjiDaDica.getDificuldadeDoKanji() == 1)
 		{
-			this.pontuacaoDoAdversario = this.pontuacaoDoAdversario + 10;
+			if(usou2x == false)
+			{
+				this.pontuacaoDoAdversario = this.pontuacaoDoAdversario + 10;
+			}
+			else
+			{
+				this.pontuacaoDoAdversario = this.pontuacaoDoAdversario + 20;
+			}
 		}
 		else if(this.kanjiDaDica.getDificuldadeDoKanji() == 2)
 		{
-			this.pontuacaoDoAdversario = this.pontuacaoDoAdversario + 20;
+			if(usou2x == false)
+			{
+				this.pontuacaoDoAdversario = this.pontuacaoDoAdversario + 20;
+			}
+			else
+			{
+				this.pontuacaoDoAdversario = this.pontuacaoDoAdversario + 40;
+			}
 		}
 		else
 		{
-			this.pontuacaoDoAdversario = this.pontuacaoDoAdversario + 30;
+			if(usou2x == false)
+			{
+				this.pontuacaoDoAdversario = this.pontuacaoDoAdversario + 30;
+			}
+			else
+			{
+				this.pontuacaoDoAdversario = this.pontuacaoDoAdversario + 60;
+			}
 		}
 		
 		this.quantasCartasJaSairamDoJogo = this.quantasCartasJaSairamDoJogo + 1;
@@ -1995,6 +2251,7 @@ private void solicitarPorKanjisPraTreino() {
 	 findViewById(R.id.dica_kanji).setVisibility(View.VISIBLE);
 	 findViewById(R.id.balao_fala).setVisibility(View.VISIBLE);
 	 findViewById(R.id.parartempopequeno).setVisibility(View.INVISIBLE);
+	 findViewById(R.id.doisxpequeno).setVisibility(View.INVISIBLE);
 	 
 	 findViewById(R.id.karuta1_imageview).setOnClickListener(this);
 	 findViewById(R.id.karuta2_imageview).setOnClickListener(this);
@@ -2010,7 +2267,7 @@ private void solicitarPorKanjisPraTreino() {
 	 
 	 TextView textViewPontuacao = (TextView) findViewById(R.id.pontuacao);
 	 String pontuacao = getResources().getString(R.string.pontuacao);
-	 textViewPontuacao.setText(pontuacao + "0");
+	 textViewPontuacao.setText(pontuacao + "000");
 	 
 	 this.rodadaAtual = 1;
 	 TextView textViewRodada = (TextView) findViewById(R.id.rodada);
@@ -2027,8 +2284,8 @@ private void solicitarPorKanjisPraTreino() {
 	 this.itemAtual = "";
 	 this.itensDoGanhador = new LinkedList<String>();
 	 this.itensDoPerdedor = new LinkedList<String>();
-	 //itensDoGanhador.add("trovaotiracartaaleatoria");
-	 itensDoGanhador.add("parartempo");
+	 itensDoGanhador.add("trovaotiracartaaleatoria");
+	 //itensDoGanhador.add("parartempo");
 	 //itensDoGanhador.add("misturarcartas");
 	 //itensDoPerdedor.add("mudardica");
 	 //itensDoGanhador.add("doisx");
@@ -2039,6 +2296,7 @@ private void solicitarPorKanjisPraTreino() {
 	 
 	 this.usouTrovaoTiraCarta = false;
 	 this.usouReviveCarta = false;
+	 this.usou2x = false;
 	 
 	 TextView textoTempo = (TextView) findViewById(R.id.tempo);
 	 String stringTempo = getResources().getString(R.string.tempo_restante);
@@ -2176,49 +2434,49 @@ private void solicitarPorKanjisPraTreino() {
 				 if(i == 0)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta1);
-					 texto.setText(kanjiTreinar.getKanji());
+					 this.colocarTextoVerticalNaCarta(texto, kanjiTreinar.getKanji());
 					 findViewById(R.id.karuta1_imageview).setClickable(true);
 				 }
 				 else if(i == 1)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta2);
-					 texto.setText(kanjiTreinar.getKanji());
+					 this.colocarTextoVerticalNaCarta(texto, kanjiTreinar.getKanji());
 					 findViewById(R.id.karuta2_imageview).setClickable(true);
 				 }
 				 else if(i == 2)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta3);
-					 texto.setText(kanjiTreinar.getKanji());
+					 this.colocarTextoVerticalNaCarta(texto, kanjiTreinar.getKanji());
 					 findViewById(R.id.karuta3_imageview).setClickable(true);
 				 }
 				 else if(i == 3)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta4);
-					 texto.setText(kanjiTreinar.getKanji());
+					 this.colocarTextoVerticalNaCarta(texto, kanjiTreinar.getKanji());
 					 findViewById(R.id.karuta4_imageview).setClickable(true);
 				 }
 				 else if(i == 4)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta5);
-					 texto.setText(kanjiTreinar.getKanji());
+					 this.colocarTextoVerticalNaCarta(texto, kanjiTreinar.getKanji());
 					 findViewById(R.id.karuta5_imageview).setClickable(true);
 				 }
 				 else if(i == 5)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta6);
-					 texto.setText(kanjiTreinar.getKanji());
+					 this.colocarTextoVerticalNaCarta(texto, kanjiTreinar.getKanji());
 					 findViewById(R.id.karuta6_imageview).setClickable(true);
 				 }
 				 else if(i == 6)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta7);
-					 texto.setText(kanjiTreinar.getKanji());
+					 this.colocarTextoVerticalNaCarta(texto, kanjiTreinar.getKanji());
 					 findViewById(R.id.karuta7_imageview).setClickable(true);
 				 }
 				 else if(i == 7)
 				 {
 					 TextView texto = (TextView) findViewById(R.id.texto_karuta8);
-					 texto.setText(kanjiTreinar.getKanji());
+					 this.colocarTextoVerticalNaCarta(texto, kanjiTreinar.getKanji());
 					 findViewById(R.id.karuta8_imageview).setClickable(true);
 				 } 
 				 
@@ -2446,15 +2704,16 @@ private void solicitarPorKanjisPraTreino() {
 				 texto.setText(""); 
 				 ImageView imageViewCarta1 = (ImageView) findViewById(R.id.karuta1_imageview);
 				 imageViewCarta1.setClickable(false);
-				 imageViewCarta1.setImageResource(R.drawable.karutax);
+				 this.fazerImageViewFicarEscuro(imageViewCarta1);
 			 }
 			 else
 			 {
 				 TextView texto = (TextView) findViewById(R.id.texto_karuta1);
-				 texto.setText(umKanji);
+				 this.colocarTextoVerticalNaCarta(texto, umKanji);
 				 ImageView imageViewCarta1 = (ImageView) findViewById(R.id.karuta1_imageview);
 				 imageViewCarta1.setClickable(true);
 				 imageViewCarta1.setImageResource(R.drawable.karutavazia);
+				 this.fazerImageViewVoltarACorNormal(imageViewCarta1);
 				 
 			 }
 		 }
@@ -2466,15 +2725,16 @@ private void solicitarPorKanjisPraTreino() {
 				 texto.setText(""); 
 				 ImageView imageViewCarta2 = (ImageView) findViewById(R.id.karuta2_imageview);
 				 imageViewCarta2.setClickable(false);
-				 imageViewCarta2.setImageResource(R.drawable.karutax);
+				 this.fazerImageViewFicarEscuro(imageViewCarta2);
 			 }
 			 else
 			 {
 				 TextView texto = (TextView) findViewById(R.id.texto_karuta2);
-				 texto.setText(umKanji);
+				 this.colocarTextoVerticalNaCarta(texto, umKanji);
 				 ImageView imageViewCarta2 = (ImageView) findViewById(R.id.karuta2_imageview);
 				 imageViewCarta2.setClickable(true);
 				 imageViewCarta2.setImageResource(R.drawable.karutavazia);
+				 this.fazerImageViewVoltarACorNormal(imageViewCarta2);
 			 }
 		 }
 		 else if(i == 2)
@@ -2485,15 +2745,16 @@ private void solicitarPorKanjisPraTreino() {
 				 texto.setText(""); 
 				 ImageView imageViewCarta3 = (ImageView) findViewById(R.id.karuta3_imageview);
 				 imageViewCarta3.setClickable(false);
-				 imageViewCarta3.setImageResource(R.drawable.karutax);
+				 this.fazerImageViewFicarEscuro(imageViewCarta3);
 			 }
 			 else
 			 {
 				 TextView texto = (TextView) findViewById(R.id.texto_karuta3);
-				 texto.setText(umKanji);
+				 this.colocarTextoVerticalNaCarta(texto, umKanji);
 				 ImageView imageViewCarta3 = (ImageView) findViewById(R.id.karuta3_imageview);
 				 imageViewCarta3.setClickable(true);
 				 imageViewCarta3.setImageResource(R.drawable.karutavazia);
+				 this.fazerImageViewVoltarACorNormal(imageViewCarta3);
 			 }
 		 }
 		 else if(i == 3)
@@ -2504,15 +2765,16 @@ private void solicitarPorKanjisPraTreino() {
 				 texto.setText(""); 
 				 ImageView imageViewCarta4 = (ImageView) findViewById(R.id.karuta4_imageview);
 				 imageViewCarta4.setClickable(false);
-				 imageViewCarta4.setImageResource(R.drawable.karutax);
+				 this.fazerImageViewFicarEscuro(imageViewCarta4);
 			 }
 			 else
 			 {
 				 TextView texto = (TextView) findViewById(R.id.texto_karuta4);
-				 texto.setText(umKanji);
+				 this.colocarTextoVerticalNaCarta(texto, umKanji);
 				 ImageView imageViewCarta4 = (ImageView) findViewById(R.id.karuta4_imageview);
 				 imageViewCarta4.setClickable(true);
 				 imageViewCarta4.setImageResource(R.drawable.karutavazia);
+				 this.fazerImageViewVoltarACorNormal(imageViewCarta4);
 			 }
 		 }
 		 else if(i == 4)
@@ -2523,15 +2785,16 @@ private void solicitarPorKanjisPraTreino() {
 				 texto.setText(""); 
 				 ImageView imageViewCarta5 = (ImageView) findViewById(R.id.karuta5_imageview);
 				 imageViewCarta5.setClickable(false);
-				 imageViewCarta5.setImageResource(R.drawable.karutax);
+				 this.fazerImageViewFicarEscuro(imageViewCarta5);
 			 }
 			 else
 			 {
 				 TextView texto = (TextView) findViewById(R.id.texto_karuta5);
-				 texto.setText(umKanji);
+				 this.colocarTextoVerticalNaCarta(texto, umKanji);
 				 ImageView imageViewCarta5 = (ImageView) findViewById(R.id.karuta5_imageview);
 				 imageViewCarta5.setClickable(true);
 				 imageViewCarta5.setImageResource(R.drawable.karutavazia);
+				 this.fazerImageViewVoltarACorNormal(imageViewCarta5);
 			 }
 		 }
 		 else if(i == 5)
@@ -2542,15 +2805,16 @@ private void solicitarPorKanjisPraTreino() {
 				 texto.setText(""); 
 				 ImageView imageViewCarta6 = (ImageView) findViewById(R.id.karuta6_imageview);
 				 imageViewCarta6.setClickable(false);
-				 imageViewCarta6.setImageResource(R.drawable.karutax);
+				 this.fazerImageViewFicarEscuro(imageViewCarta6);
 			 }
 			 else
 			 {
 				 TextView texto = (TextView) findViewById(R.id.texto_karuta6);
-				 texto.setText(umKanji);
+				 this.colocarTextoVerticalNaCarta(texto, umKanji);
 				 ImageView imageViewCarta6 = (ImageView) findViewById(R.id.karuta6_imageview);
 				 imageViewCarta6.setClickable(true);
 				 imageViewCarta6.setImageResource(R.drawable.karutavazia);
+				 this.fazerImageViewVoltarACorNormal(imageViewCarta6);
 			 }
 		 }
 		 else if(i == 6)
@@ -2561,15 +2825,16 @@ private void solicitarPorKanjisPraTreino() {
 				 texto.setText(""); 
 				 ImageView imageViewCarta7 = (ImageView) findViewById(R.id.karuta7_imageview);
 				 imageViewCarta7.setClickable(false);
-				 imageViewCarta7.setImageResource(R.drawable.karutax);
+				 this.fazerImageViewFicarEscuro(imageViewCarta7);
 			 }
 			 else
 			 {
 				 TextView texto = (TextView) findViewById(R.id.texto_karuta7);
-				 texto.setText(umKanji);
+				 this.colocarTextoVerticalNaCarta(texto, umKanji);
 				 ImageView imageViewCarta7 = (ImageView) findViewById(R.id.karuta7_imageview);
 				 imageViewCarta7.setClickable(true);
 				 imageViewCarta7.setImageResource(R.drawable.karutavazia);
+				 this.fazerImageViewVoltarACorNormal(imageViewCarta7);
 			 }
 		 }
 		 else if(i == 7)
@@ -2580,15 +2845,16 @@ private void solicitarPorKanjisPraTreino() {
 				 texto.setText(""); 
 				 ImageView imageViewCarta8 = (ImageView) findViewById(R.id.karuta8_imageview);
 				 imageViewCarta8.setClickable(false);
-				 imageViewCarta8.setImageResource(R.drawable.karutax);
+				 this.fazerImageViewFicarEscuro(imageViewCarta8);
 			 }
 			 else
 			 {
 				 TextView texto = (TextView) findViewById(R.id.texto_karuta8);
-				 texto.setText(umKanji);
+				 this.colocarTextoVerticalNaCarta(texto, umKanji);
 				 ImageView imageViewCarta8 = (ImageView) findViewById(R.id.karuta8_imageview);
 				 imageViewCarta8.setClickable(true);
 				 imageViewCarta8.setImageResource(R.drawable.karutavazia);
+				 this.fazerImageViewVoltarACorNormal(imageViewCarta8);
 			 }
 		 }
 	 }
@@ -2681,7 +2947,12 @@ private void solicitarPorKanjisPraTreino() {
  /*assim que o usuario acerta uma carta, ele avisa ao adversairo que aquela carta nao pode ser mais escolhida*/
  private void alertarAoAdversarioQueACartaNaoEhMaisClicavel(String qualCarta)
  {
-	 String mensagem = "naoClicavel=" + qualCarta; //ex: naoClicavel=karuta1
+	 String mensagem = "naoClicavel=" + qualCarta + ";" + "usou2x=" + this.usou2x; //ex: naoClicavel=karuta1
+	 if(this.usou2x == true)
+	 {
+		 this.usou2x = false;
+	 }
+	 
 	 this.mandarMensagemMultiplayer(mensagem);
  }
  
@@ -2739,34 +3010,42 @@ private void solicitarPorKanjisPraTreino() {
  {
 	 ImageView imageViewKaruta1 = (ImageView) findViewById(R.id.karuta1_imageview);
 	 imageViewKaruta1.setImageResource(R.drawable.karutavazia); //mudei a figura da carta
+	 this.fazerImageViewVoltarACorNormal(imageViewKaruta1);
 	 findViewById(R.id.karuta1).setClickable(true);
 	 
 	 ImageView imageViewKaruta2 = (ImageView) findViewById(R.id.karuta2_imageview);
 	 imageViewKaruta2.setImageResource(R.drawable.karutavazia); //mudei a figura da carta
+	 this.fazerImageViewVoltarACorNormal(imageViewKaruta2);
 	 findViewById(R.id.karuta2).setClickable(true);
 	 
 	 ImageView imageViewKaruta3 = (ImageView) findViewById(R.id.karuta3_imageview);
 	 imageViewKaruta3.setImageResource(R.drawable.karutavazia); //mudei a figura da carta
+	 this.fazerImageViewVoltarACorNormal(imageViewKaruta3);
 	 findViewById(R.id.karuta3).setClickable(true);
 	 
 	 ImageView imageViewKaruta4 = (ImageView) findViewById(R.id.karuta4_imageview);
 	 imageViewKaruta4.setImageResource(R.drawable.karutavazia); //mudei a figura da carta
+	 this.fazerImageViewVoltarACorNormal(imageViewKaruta4);
 	 findViewById(R.id.karuta4).setClickable(true);
 	 
 	 ImageView imageViewKaruta5 = (ImageView) findViewById(R.id.karuta5_imageview);
 	 imageViewKaruta5.setImageResource(R.drawable.karutavazia); //mudei a figura da carta
+	 this.fazerImageViewVoltarACorNormal(imageViewKaruta5);
 	 findViewById(R.id.karuta5).setClickable(true);
 	 
 	 ImageView imageViewKaruta6 = (ImageView) findViewById(R.id.karuta6_imageview);
 	 imageViewKaruta6.setImageResource(R.drawable.karutavazia); //mudei a figura da carta
+	 this.fazerImageViewVoltarACorNormal(imageViewKaruta6);
 	 findViewById(R.id.karuta6).setClickable(true);
 	 
 	 ImageView imageViewKaruta7 = (ImageView) findViewById(R.id.karuta7_imageview);
 	 imageViewKaruta7.setImageResource(R.drawable.karutavazia); //mudei a figura da carta
+	 this.fazerImageViewVoltarACorNormal(imageViewKaruta7);
 	 findViewById(R.id.karuta7).setClickable(true);
 	 
 	 ImageView imageViewKaruta8 = (ImageView) findViewById(R.id.karuta8_imageview);
 	 imageViewKaruta8.setImageResource(R.drawable.karutavazia); //mudei a figura da carta
+	 this.fazerImageViewVoltarACorNormal(imageViewKaruta8);
 	 findViewById(R.id.karuta8).setClickable(true);
  }
  
@@ -3119,7 +3398,9 @@ private void solicitarPorKanjisPraTreino() {
 	 }
 	 else if(this.itemAtual.compareTo("doisx") == 0)
 	 {
-		 
+		 super.reproduzirSfx("dois_x");
+		 this.usou2x = true;
+		 findViewById(R.id.doisxpequeno).setVisibility(View.VISIBLE);
 	 }
 	 else if(this.itemAtual.compareTo("segundamao") == 0)
 	 {
@@ -3220,13 +3501,13 @@ private void solicitarPorKanjisPraTreino() {
 	 int idImagemKarutaTrovao2 = getResources().getIdentifier("karutatrovao2", "drawable", getPackageName());
 	 int idImagemKarutaTrovao3 = getResources().getIdentifier("karutatrovao3", "drawable", getPackageName());
 	 int idImagemKarutaTrovao4 = getResources().getIdentifier("karutatrovao4", "drawable", getPackageName());
-	 int idImagemKarutaX = getResources().getIdentifier("karutax", "drawable", getPackageName());
+	 int idImagemKarutaTrovao5 = getResources().getIdentifier("karutavazia", "drawable", getPackageName());
 	 
 	 animacaoTrovaoAcertaCarta.addFrame(getResources().getDrawable(idImagemKarutaTrovao1), 200);
 	 animacaoTrovaoAcertaCarta.addFrame(getResources().getDrawable(idImagemKarutaTrovao2), 200);
 	 animacaoTrovaoAcertaCarta.addFrame(getResources().getDrawable(idImagemKarutaTrovao3), 200);
 	 animacaoTrovaoAcertaCarta.addFrame(getResources().getDrawable(idImagemKarutaTrovao4), 200);
-	 animacaoTrovaoAcertaCarta.addFrame(getResources().getDrawable(idImagemKarutaX), 200);
+	 animacaoTrovaoAcertaCarta.addFrame(getResources().getDrawable(idImagemKarutaTrovao5), 10);
 	 
 	 animacaoTrovaoAcertaCarta.setOneShot(true);
 	 cartaASerTirada.setImageDrawable(animacaoTrovaoAcertaCarta);
@@ -3241,6 +3522,23 @@ private void solicitarPorKanjisPraTreino() {
 	 
 	cartaASerTirada.setClickable(false); //a carta nao esta mais clicavel ate o final da rodada
 	textoCartaTirada.setText("");
+	
+	new Timer().schedule(new TimerTask() 
+	 { 
+		    @Override
+		    public void run() 
+		    {
+		        //If you want to operate UI modifications, you must run ui stuff on UiThread.
+		        TelaInicialMultiplayer.this.runOnUiThread(new Runnable() 
+		        {
+		            @Override
+		            public void run() 
+		            {
+		            	fazerImageViewFicarEscuro(cartaASerTirada);
+		            }
+		        });
+		    }
+		}, 1000);
 	
 	KanjiTreinar kanjiRemovido = this.kanjisDasCartasNaTela.get(indiceCartaTrovoada);
 	this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.add(kanjiRemovido);
@@ -3914,7 +4212,9 @@ private void solicitarPorKanjisPraTreino() {
  {
 	 final AnimationDrawable animacaoReviveCarta = new AnimationDrawable();
 	 final TextView textViewCartaRevividaFinal = textViewCartaRevivida;
+	 final ImageView imageViewCartaRevividaFinal = imageViewCartaRevivida;
 	 final String textoCartaRevividaFinal = textoCartaRevivida; 
+	 
 	 int idImagemKarutaRevive1 = getResources().getIdentifier("karutarevive1", "drawable", getPackageName());
 	 int idImagemKarutaRevive2 = getResources().getIdentifier("karutarevive2", "drawable", getPackageName());
 	 int idImagemKarutaRevive3 = getResources().getIdentifier("karutarevive3", "drawable", getPackageName());
@@ -3929,6 +4229,8 @@ private void solicitarPorKanjisPraTreino() {
 	 imageViewCartaRevivida.setImageDrawable(animacaoReviveCarta);
 	 
 	 super.reproduzirSfx("reviver_carta");
+	 
+	 this.fazerImageViewVoltarACorNormal(imageViewCartaRevividaFinal);
 	 
 	 imageViewCartaRevivida.post(new Runnable() {
 		@Override
@@ -3950,7 +4252,8 @@ private void solicitarPorKanjisPraTreino() {
 		            {
 		       		  //FALTA TORNAR A CARTA CLICAVEL E AS OUTRAS NAO. posso fazer isso com a funcao abaixo
 		       		  terminouEsperaUsuarioErrouCarta();
-		       		  textViewCartaRevividaFinal.setText(textoCartaRevividaFinal);
+		       		  fazerImageViewVoltarACorNormal(imageViewCartaRevividaFinal);
+		       		  colocarTextoVerticalNaCarta(textViewCartaRevividaFinal, textoCartaRevividaFinal);
 		            }
 		        });
 		    }
@@ -4172,5 +4475,30 @@ private void solicitarPorKanjisPraTreino() {
 	 this.loadingComecoDaPartida = ProgressDialog.show(TelaInicialMultiplayer.this, getResources().getString(R.string.iniciandoJogo), getResources().getString(R.string.por_favor_aguarde));
  }
  
+ /*é o que eu uso para escurecer as cartas*/
+ private void fazerImageViewFicarEscuro(ImageView imageView)
+ {
+	 imageView.setColorFilter(Color.rgb(123, 123, 123), android.graphics.PorterDuff.Mode.MULTIPLY);
+ }
+ 
+ private void fazerImageViewVoltarACorNormal(ImageView imageView)
+ {
+	 imageView.setColorFilter(null);
+ }
+ 
+ /*coloca o texto verticalmente numa carta*/
+ private void colocarTextoVerticalNaCarta(TextView textViewUmaCarta, String texto)
+ {
+	 //cada caractere do texto deve vir seguido de um \n
+	 String textoComBarrasN = "";
+	 
+	 for(int i = 0; i < texto.length(); i++)
+	 {
+		 String umaLetra = String.valueOf(texto.charAt(i));
+		 textoComBarrasN = textoComBarrasN + umaLetra + "\n";
+	 }
+	 
+	 textViewUmaCarta.setText(textoComBarrasN);
+ }
  
 }
