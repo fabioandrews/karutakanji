@@ -55,6 +55,9 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 			soundIds[4] = soundPool.load(getApplicationContext(), R.raw.magic_spell_trick_sound_001, 1);		
 			soundIds[5] = soundPool.load(getApplicationContext(), R.raw.nice_playing_harp, 1);
 			soundIds[6] = soundPool.load(getApplicationContext(), R.raw.glass_ping, 1);
+			soundIds[7] = soundPool.load(getApplicationContext(), R.raw.quick_buzzer_like_a_game_show_wrong_answer_, 1);
+			soundIds[8] = soundPool.load(getApplicationContext(), R.raw.science_fiction_laser_gun_or_beam_fire_version_4, 1);
+			
 			
 			//embaixo, bote os seus botoes q vc quer que o usuario possa clicar e lancar o sfx
 			//LEMBRAR: CHAMAR SUPER.ONCREATE() SÓ DEPOIS DE SETCONTENTVIEW NA SUBCLASSE!
@@ -102,6 +105,14 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 		else if(qualEfeitoSonoro.compareTo("dois_x") == 0)
 		{
 			this.tocarSom(soundIds[6]);
+		}
+		else if(qualEfeitoSonoro.compareTo("nao_espere_mais") == 0)
+		{
+			this.tocarSom(soundIds[7]);
+		}
+		else if(qualEfeitoSonoro.compareTo("cartas_douradas") == 0)
+		{
+			this.tocarSom(soundIds[8]);
 		}
 	}
 	

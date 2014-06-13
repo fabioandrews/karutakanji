@@ -145,6 +145,11 @@ private ImageView cartaASerTirada; //na hora que o item do trovao for usado, pre
 private boolean usouTrovaoTiraCarta; //booleano que diz se o usuario usou o item trovaotiracarta
 private boolean usouReviveCarta; //booleano que diz se o usuario usou o item revivecarta
 private boolean usou2x; //booleano que diz se o usuario usou o item 2x
+private boolean usouNaoEspereMais; //booleano que diz se o usuario usou o item nao espere mais
+
+private int qualCartaEstaProibida; //quando o user usa o naoesperemais e erra uma carta, ela fica proibida. Mas assim alguem acerta uma carta e a dica muda, a carta deveria voltar ao normal. Esse numero vai de 1 ate 8
+								   //quando esse int for 0, nao ha cartas proibidas na tela
+private LinkedList<Integer> quaisCartasEstaoDouradas; //quando o usuario usa o cartasdouradas, algumas cartas ficam douradas. Mas assim que alguem acerta uma carta e a dica muda, as cartas deveriam voltar ao normal. Os numeros das cartas vao de 1 a 8
 
 public boolean guestTerminouDeCarregarListaDeCategorias; //booleano para resolver problema de um dos jogadores nao estar recebendo a lista de categorias
 private Handler mHandler = new Handler(); //handler para o chat do final do jogo
@@ -280,6 +285,11 @@ switch (v.getId()) {
         		//tb devemos executar o som que indica que ele acertou uma carta
         		super.reproduzirSfx("acertou_carta");
         		
+        		//se existir alguma carta proibida na tela, ela deve desaparecer(item naoesperemais)
+        		this.fazerCartaProibidaVoltarAoNormal();
+        		//se existir alguma carta dourada na tela, ela deve voltar ao normal(item cartasdouradas)
+        		this.fazerCartasDouradasVoltaremAoNormal();
+        		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta1 = (ImageView) findViewById(R.id.karuta1_imageview);
         		this.fazerImageViewFicarEscuro(imageViewKaruta1); //mudei a figura da carta
@@ -294,13 +304,20 @@ switch (v.getId()) {
         	}
         	else
         	{
-        		//errou
+        		//errou, mas sera q ele usou o item naoesperemais?
         		
-        		//devemos executar o som que indica que ele errou uma carta
-        		super.reproduzirSfx("errou_carta");
-        		
-        		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(0)); //colocar no log que ele errou este kanji
-        		this.realizarProcedimentoUsuarioErrouCarta();
+        		if(this.usouNaoEspereMais == false)
+        		{
+        			//devemos executar o som que indica que ele errou uma carta
+            		super.reproduzirSfx("errou_carta");
+            		
+            		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(0)); //colocar no log que ele errou este kanji
+            		this.realizarProcedimentoUsuarioErrouCarta();
+        		}
+        		else
+        		{
+        			this.proibirCartaNaPosicao(1);
+        		}
         	}
     	}
     	else if(this.usouReviveCarta == true)
@@ -349,6 +366,11 @@ switch (v.getId()) {
         		//tb devemos executar o som que indica que ele acertou uma carta
         		super.reproduzirSfx("acertou_carta");
         		
+        		//se existir alguma carta proibida na tela, ela deve desaparecer(item naoesperemais)
+        		this.fazerCartaProibidaVoltarAoNormal();
+        		//se existir alguma carta dourada na tela, ela deve voltar ao normal(item cartasdouradas)
+        		this.fazerCartasDouradasVoltaremAoNormal();
+        		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta2 = (ImageView) findViewById(R.id.karuta2_imageview);
         		this.fazerImageViewFicarEscuro(imageViewKaruta2); //mudei a figura da carta
@@ -362,13 +384,20 @@ switch (v.getId()) {
         	}
         	else
         	{
-        		//errou
+        		//errou, mas sera q ele usou o item naoesperemais?
         		
-        		//devemos executar o som que indica que ele errou uma carta
-        		super.reproduzirSfx("errou_carta");
-        		
-        		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(1)); //colocar no log que ele errou este kanji
-        		this.realizarProcedimentoUsuarioErrouCarta();
+        		if(this.usouNaoEspereMais == false)
+        		{
+        			//devemos executar o som que indica que ele errou uma carta
+            		super.reproduzirSfx("errou_carta");
+            		
+            		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(1)); //colocar no log que ele errou este kanji
+            		this.realizarProcedimentoUsuarioErrouCarta();
+        		}
+        		else
+        		{
+        			this.proibirCartaNaPosicao(2);
+        		}
         	}
     	}
     	else if(this.usouReviveCarta == true)
@@ -416,6 +445,11 @@ switch (v.getId()) {
         		//tb devemos executar o som que indica que ele acertou uma carta
         		super.reproduzirSfx("acertou_carta");
         		
+        		//se existir alguma carta proibida na tela, ela deve desaparecer(item naoesperemais)
+        		this.fazerCartaProibidaVoltarAoNormal();
+        		//se existir alguma carta dourada na tela, ela deve voltar ao normal(item cartasdouradas)
+        		this.fazerCartasDouradasVoltaremAoNormal();
+        		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta3 = (ImageView) findViewById(R.id.karuta3_imageview);
         		this.fazerImageViewFicarEscuro(imageViewKaruta3); //mudei a figura da carta
@@ -429,13 +463,20 @@ switch (v.getId()) {
         	}
         	else
         	{
-        		//errou
+        		//errou, mas sera q ele usou o item naoesperemais?
         		
-        		//devemos executar o som que indica que ele errou uma carta
-        		super.reproduzirSfx("errou_carta");
-        		
-        		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(2)); //colocar no log que ele errou este kanji
-        		this.realizarProcedimentoUsuarioErrouCarta();
+        		if(this.usouNaoEspereMais == false)
+        		{
+        			//devemos executar o som que indica que ele errou uma carta
+            		super.reproduzirSfx("errou_carta");
+            		
+            		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(2)); //colocar no log que ele errou este kanji
+            		this.realizarProcedimentoUsuarioErrouCarta();
+        		}
+        		else
+        		{
+        			this.proibirCartaNaPosicao(3);
+        		}
         	}
     	}
     	else if(this.usouReviveCarta == true)
@@ -483,6 +524,11 @@ switch (v.getId()) {
         		//tb devemos executar o som que indica que ele acertou uma carta
         		super.reproduzirSfx("acertou_carta");
         		
+        		//se existir alguma carta proibida na tela, ela deve desaparecer(item naoesperemais)
+        		this.fazerCartaProibidaVoltarAoNormal();
+        		//se existir alguma carta dourada na tela, ela deve voltar ao normal(item cartasdouradas)
+        		this.fazerCartasDouradasVoltaremAoNormal();
+        		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta4 = (ImageView) findViewById(R.id.karuta4_imageview);
         		this.fazerImageViewFicarEscuro(imageViewKaruta4); //mudei a figura da carta
@@ -496,13 +542,20 @@ switch (v.getId()) {
         	}
         	else
         	{
-        		//errou
+        		//errou, mas sera q ele usou o item naoesperemais?
         		
-        		//devemos executar o som que indica que ele errou uma carta
-        		super.reproduzirSfx("errou_carta");
-        		
-        		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(3)); //colocar no log que ele errou este kanji
-        		this.realizarProcedimentoUsuarioErrouCarta();
+        		if(this.usouNaoEspereMais == false)
+        		{
+        			//devemos executar o som que indica que ele errou uma carta
+            		super.reproduzirSfx("errou_carta");
+            		
+            		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(3)); //colocar no log que ele errou este kanji
+            		this.realizarProcedimentoUsuarioErrouCarta();
+        		}
+        		else
+        		{
+        			this.proibirCartaNaPosicao(4);
+        		}
         	}
     	}
     	else if(this.usouReviveCarta == true)
@@ -550,6 +603,11 @@ switch (v.getId()) {
         		//tb devemos executar o som que indica que ele acertou uma carta
         		super.reproduzirSfx("acertou_carta");
         		
+        		//se existir alguma carta proibida na tela, ela deve desaparecer(item naoesperemais)
+        		this.fazerCartaProibidaVoltarAoNormal();
+        		//se existir alguma carta dourada na tela, ela deve voltar ao normal(item cartasdouradas)
+        		this.fazerCartasDouradasVoltaremAoNormal();
+        		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta5 = (ImageView) findViewById(R.id.karuta5_imageview);
         		this.fazerImageViewFicarEscuro(imageViewKaruta5); //mudei a figura da carta
@@ -563,13 +621,20 @@ switch (v.getId()) {
         	}
         	else
         	{
-        		//errou
+        		//errou, mas sera q ele usou o item naoesperemais?
         		
-        		//devemos executar o som que indica que ele errou uma carta
-        		super.reproduzirSfx("errou_carta");
-        		
-        		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(4)); //colocar no log que ele errou este kanji
-        		this.realizarProcedimentoUsuarioErrouCarta();
+        		if(this.usouNaoEspereMais == false)
+        		{
+        			//devemos executar o som que indica que ele errou uma carta
+            		super.reproduzirSfx("errou_carta");
+            		
+            		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(4)); //colocar no log que ele errou este kanji
+            		this.realizarProcedimentoUsuarioErrouCarta();
+        		}
+        		else
+        		{
+        			this.proibirCartaNaPosicao(5);
+        		}
         	}
     	}
     	else if(this.usouReviveCarta == true)
@@ -617,6 +682,11 @@ switch (v.getId()) {
         		//tb devemos executar o som que indica que ele acertou uma carta
         		super.reproduzirSfx("acertou_carta");
         		
+        		//se existir alguma carta proibida na tela, ela deve desaparecer(item naoesperemais)
+        		this.fazerCartaProibidaVoltarAoNormal();
+        		//se existir alguma carta dourada na tela, ela deve voltar ao normal(item cartasdouradas)
+        		this.fazerCartasDouradasVoltaremAoNormal();
+        		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta6 = (ImageView) findViewById(R.id.karuta6_imageview);
         		this.fazerImageViewFicarEscuro(imageViewKaruta6); //mudei a figura da carta
@@ -630,13 +700,20 @@ switch (v.getId()) {
         	}
         	else
         	{
-        		//errou
+        		//errou, mas sera q ele usou o item naoesperemais?
         		
-        		//devemos executar o som que indica que ele errou uma carta
-        		super.reproduzirSfx("errou_carta");
-        		
-        		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(5)); //colocar no log que ele errou este kanji
-        		this.realizarProcedimentoUsuarioErrouCarta();
+        		if(this.usouNaoEspereMais == false)
+        		{
+        			//devemos executar o som que indica que ele errou uma carta
+            		super.reproduzirSfx("errou_carta");
+            		
+            		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(5)); //colocar no log que ele errou este kanji
+            		this.realizarProcedimentoUsuarioErrouCarta();
+        		}
+        		else
+        		{
+        			this.proibirCartaNaPosicao(6);
+        		}
         	}
     	}
     	else if(this.usouReviveCarta == true)
@@ -684,6 +761,11 @@ switch (v.getId()) {
         		//tb devemos executar o som que indica que ele acertou uma carta
         		super.reproduzirSfx("acertou_carta");
         		
+        		//se existir alguma carta proibida na tela, ela deve desaparecer(item naoesperemais)
+        		this.fazerCartaProibidaVoltarAoNormal();
+        		//se existir alguma carta dourada na tela, ela deve voltar ao normal(item cartasdouradas)
+        		this.fazerCartasDouradasVoltaremAoNormal();
+        		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta7 = (ImageView) findViewById(R.id.karuta7_imageview);
         		this.fazerImageViewFicarEscuro(imageViewKaruta7); //mudei a figura da carta
@@ -697,13 +779,20 @@ switch (v.getId()) {
         	}
         	else
         	{
-        		//errou
+        		//errou, mas sera q ele usou o item naoesperemais?
         		
-        		//devemos executar o som que indica que ele errou uma carta
-        		super.reproduzirSfx("errou_carta");
-        		
-        		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(6)); //colocar no log que ele errou este kanji
-        		this.realizarProcedimentoUsuarioErrouCarta();
+        		if(this.usouNaoEspereMais == false)
+        		{
+        			//devemos executar o som que indica que ele errou uma carta
+            		super.reproduzirSfx("errou_carta");
+            		
+            		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(6)); //colocar no log que ele errou este kanji
+            		this.realizarProcedimentoUsuarioErrouCarta();
+        		}
+        		else
+        		{
+        			this.proibirCartaNaPosicao(7);
+        		}
         	}
     	}
     	else if(this.usouReviveCarta == true)
@@ -751,6 +840,11 @@ switch (v.getId()) {
         		//tb devemos executar o som que indica que ele acertou uma carta
         		super.reproduzirSfx("acertou_carta");
         		
+        		//se existir alguma carta proibida na tela, ela deve desaparecer(item naoesperemais)
+        		this.fazerCartaProibidaVoltarAoNormal();
+        		//se existir alguma carta dourada na tela, ela deve voltar ao normal(item cartasdouradas)
+        		this.fazerCartasDouradasVoltaremAoNormal();
+        		
         		this.palavrasAcertadas.add(this.kanjiDaDica); //ele acertou mais uma palavra para o log
         		ImageView imageViewKaruta8 = (ImageView) findViewById(R.id.karuta8_imageview);
         		this.fazerImageViewFicarEscuro(imageViewKaruta8); //mudei a figura da carta
@@ -764,13 +858,20 @@ switch (v.getId()) {
         	}
         	else
         	{
-        		//errou
+        		//errou, mas sera q ele usou o item naoesperemais?
         		
-        		//devemos executar o som que indica que ele errou uma carta
-        		super.reproduzirSfx("errou_carta");
-        		
-        		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(7)); //colocar no log que ele errou este kanji
-        		this.realizarProcedimentoUsuarioErrouCarta();
+        		if(this.usouNaoEspereMais == false)
+        		{
+        			//devemos executar o som que indica que ele errou uma carta
+            		super.reproduzirSfx("errou_carta");
+            		
+            		this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(7)); //colocar no log que ele errou este kanji
+            		this.realizarProcedimentoUsuarioErrouCarta();
+        		}
+        		else
+        		{
+        			this.proibirCartaNaPosicao(8);
+        		}
         	}
     	}
     	else if(this.usouReviveCarta == true)
@@ -1699,6 +1800,8 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		
 		this.mandarMensagemMultiplayer(mensagemParaODono);
 		
+		this.pegarTodosOsKanjisQuePodemVirarCartas(); //ele tb deve atualizar a lista com todos os kanjis q podem virar cartas. senao quando um turno passar, o jogador q n escolhe as categorias n tem como gerar 8 kanjis
+		
 	}
 	else if(mensagem.contains("pode comecar a escolher os kanjis") == true)
 	{
@@ -1783,6 +1886,11 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		{
 			this.loadingComecoDaPartida.dismiss();
 		}
+		
+		//assim que a dica muda, se existir alguma carta proibida na tela, ela desaparece(item naoesperemais)
+		fazerCartaProibidaVoltarAoNormal();
+		//o mesmo para se existir alguma carta dourada na tela(item cartasdouradas)
+		fazerCartasDouradasVoltaremAoNormal();
 	}
 	else if(mensagem.contains("naoClicavel=") == true)
 	{
@@ -1905,7 +2013,7 @@ public void onRealTimeMessageReceived(RealTimeMessage rtm)
 		String rodada = getResources().getString(R.string.rodada);
 		textViewRodada.setText(rodada + String.valueOf(this.rodadaAtual));
 		
-		this.tornarTodasAdCartasNaTelaClicaveisEVaziasNovamente();
+		this.tornarTodasAsCartasNaTelaClicaveisEVaziasNovamente();
 	}
 	else if(mensagem.contains("gerarMais8Cartas") == true)
 	{
@@ -2252,6 +2360,7 @@ private void solicitarPorKanjisPraTreino() {
 	 findViewById(R.id.balao_fala).setVisibility(View.VISIBLE);
 	 findViewById(R.id.parartempopequeno).setVisibility(View.INVISIBLE);
 	 findViewById(R.id.doisxpequeno).setVisibility(View.INVISIBLE);
+	 findViewById(R.id.naoesperemais).setVisibility(View.INVISIBLE);
 	 
 	 findViewById(R.id.karuta1_imageview).setOnClickListener(this);
 	 findViewById(R.id.karuta2_imageview).setOnClickListener(this);
@@ -2289,14 +2398,18 @@ private void solicitarPorKanjisPraTreino() {
 	 //itensDoGanhador.add("misturarcartas");
 	 //itensDoPerdedor.add("mudardica");
 	 //itensDoGanhador.add("doisx");
-	 //itensDoPerdedor.add("segundamao");
-	 //itensDoPerdedor.add("areadica");
+	 //itensDoPerdedor.add("naoesperemais");
+	 itensDoPerdedor.add("cartasdouradas");
 	 //itensDoPerdedor.add("trovaotiracarta");
-	 itensDoPerdedor.add("revivecarta");
+	 //itensDoPerdedor.add("revivecarta");
 	 
 	 this.usouTrovaoTiraCarta = false;
 	 this.usouReviveCarta = false;
 	 this.usou2x = false;
+	 this.usouNaoEspereMais = false;
+	 
+	 this.qualCartaEstaProibida = 0; //nenhuma carta esta proibida no comeco do jogo
+	 this.quaisCartasEstaoDouradas = new LinkedList<Integer>(); //nenhuma carta estah dourada no comeco
 	 
 	 TextView textoTempo = (TextView) findViewById(R.id.tempo);
 	 String stringTempo = getResources().getString(R.string.tempo_restante);
@@ -2337,15 +2450,19 @@ private void solicitarPorKanjisPraTreino() {
  		            @Override
  		            public void run() 
  		            {
- 		            	passarUmSegundo();
- 		            	if(tempoRestante <= 0)
+ 		            	if(loadingComecoDaPartida.isShowing() == false)
  		            	{
- 		            		//o jogo deve acabar
- 		            		
- 		            		if(jogoAcabou == false)
- 		            		{
- 		            			terminarJogoEEnviarMesagemAoAdversario();
- 		            		}
+ 		            		//o tempo so passa apos o loading comeco da partida passar
+ 		            		passarUmSegundo();
+ 	 		            	if(tempoRestante <= 0)
+ 	 		            	{
+ 	 		            		//o jogo deve acabar
+ 	 		            		
+ 	 		            		if(jogoAcabou == false)
+ 	 		            		{
+ 	 		            			terminarJogoEEnviarMesagemAoAdversario();
+ 	 		            		}
+ 	 		            	}
  		            	}
  		            }
  		        });
@@ -2987,7 +3104,7 @@ private void solicitarPorKanjisPraTreino() {
 	 String rodada = getResources().getString(R.string.rodada);
 	 textViewRodada.setText(rodada + String.valueOf(this.rodadaAtual));
 	 
-	 this.tornarTodasAdCartasNaTelaClicaveisEVaziasNovamente();
+	 this.tornarTodasAsCartasNaTelaClicaveisEVaziasNovamente();
 	 
 	 String mensagemRodadaMudou = "rodadaMudou";
 	 this.mandarMensagemMultiplayer(mensagemRodadaMudou);
@@ -3006,7 +3123,7 @@ private void solicitarPorKanjisPraTreino() {
  }
  
  /*as cartas voltam a ser clicaveis e o X no meio da carta desaparece*/
- private void tornarTodasAdCartasNaTelaClicaveisEVaziasNovamente()
+ private void tornarTodasAsCartasNaTelaClicaveisEVaziasNovamente()
  {
 	 ImageView imageViewKaruta1 = (ImageView) findViewById(R.id.karuta1_imageview);
 	 imageViewKaruta1.setImageResource(R.drawable.karutavazia); //mudei a figura da carta
@@ -3308,13 +3425,13 @@ private void solicitarPorKanjisPraTreino() {
 	 {
 		 imagemItem.setImageResource(R.drawable.doisx);
 	 }
-	 else if(this.itemAtual.compareTo("segundamao") == 0)
+	 else if(this.itemAtual.compareTo("naoesperemais") == 0)
 	 {
-		 imagemItem.setImageResource(R.drawable.segundamao);
+		 imagemItem.setImageResource(R.drawable.naoesperemais);
 	 }
-	 else if(this.itemAtual.compareTo("areadica") == 0)
+	 else if(this.itemAtual.compareTo("cartasdouradas") == 0)
 	 {
-		 imagemItem.setImageResource(R.drawable.areadica);
+		 imagemItem.setImageResource(R.drawable.cartasdouradas);
 	 }
 	 else if(this.itemAtual.compareTo("trovaotiracarta") == 0)
 	 {
@@ -3402,13 +3519,15 @@ private void solicitarPorKanjisPraTreino() {
 		 this.usou2x = true;
 		 findViewById(R.id.doisxpequeno).setVisibility(View.VISIBLE);
 	 }
-	 else if(this.itemAtual.compareTo("segundamao") == 0)
+	 else if(this.itemAtual.compareTo("naoesperemais") == 0)
 	 {
-		 
+		 this.usouNaoEspereMais = true;
+		 findViewById(R.id.naoesperemais).setVisibility(View.VISIBLE);
 	 }
-	 else if(this.itemAtual.compareTo("areadica") == 0)
+	 else if(this.itemAtual.compareTo("cartasdouradas") == 0)
 	 {
-		 
+		 this.realizarProcedimentoFazerCartasFicaremDouradas();
+		 super.reproduzirSfx("cartas_douradas");
 	 }
 	 else if(this.itemAtual.compareTo("trovaotiracarta") == 0)
 	 {
@@ -4260,6 +4379,294 @@ private void solicitarPorKanjisPraTreino() {
 		}, 1000);
  }
  
+ /*faz carta nessa posicao ficar proibida. Chamada quando o usuario erra uma carta e usou o item naoesperemais Posicao vai de 1 a 8*/
+ private void proibirCartaNaPosicao(int posicao)
+ {
+	 this.palavrasErradas.add(this.kanjisDasCartasNaTela.get(posicao - 1));
+	 this.qualCartaEstaProibida = posicao;
+	 ImageView imageViewCartaErrada;
+	 TextView textViewCartaErrada;
+	 
+	 if(posicao == 1)
+	 {
+		 imageViewCartaErrada = (ImageView) findViewById(R.id.karuta1_imageview);
+		 textViewCartaErrada = (TextView) findViewById(R.id.texto_karuta1);
+	 }
+	 else if(posicao == 2)
+	 {
+		 imageViewCartaErrada = (ImageView) findViewById(R.id.karuta2_imageview);
+		 textViewCartaErrada = (TextView) findViewById(R.id.texto_karuta2);
+	 }
+	 else if(posicao == 3)
+	 {
+		 imageViewCartaErrada = (ImageView) findViewById(R.id.karuta3_imageview);
+		 textViewCartaErrada = (TextView) findViewById(R.id.texto_karuta3);
+	 }
+	 else if(posicao == 4)
+	 {
+		 imageViewCartaErrada = (ImageView) findViewById(R.id.karuta4_imageview);
+		 textViewCartaErrada = (TextView) findViewById(R.id.texto_karuta4);
+	 }
+	 else if(posicao == 5)
+	 {
+		 imageViewCartaErrada = (ImageView) findViewById(R.id.karuta5_imageview);
+		 textViewCartaErrada = (TextView) findViewById(R.id.texto_karuta5);
+	 }
+	 else if(posicao == 6)
+	 {
+		 imageViewCartaErrada = (ImageView) findViewById(R.id.karuta6_imageview);
+		 textViewCartaErrada = (TextView) findViewById(R.id.texto_karuta6);
+	 }
+	 else if(posicao == 7)
+	 {
+		 imageViewCartaErrada = (ImageView) findViewById(R.id.karuta7_imageview);
+		 textViewCartaErrada = (TextView) findViewById(R.id.texto_karuta7);
+	 }
+	 else 
+	 {
+		 imageViewCartaErrada = (ImageView) findViewById(R.id.karuta8_imageview);
+		 textViewCartaErrada = (TextView) findViewById(R.id.texto_karuta8);
+	 }
+	 
+	 imageViewCartaErrada.setImageResource(R.drawable.karutavaziaproibida);
+	 imageViewCartaErrada.setClickable(false);
+	 imageViewCartaErrada.setAlpha(128);
+	 textViewCartaErrada.setVisibility(View.INVISIBLE);
+	 
+	 findViewById(R.id.naoesperemais).setVisibility(View.INVISIBLE);
+	 this.usouNaoEspereMais = false;
+	 
+	 super.reproduzirSfx("nao_espere_mais");
+ }
+ 
+ private void fazerCartaProibidaVoltarAoNormal()
+ {
+	 if(this.qualCartaEstaProibida != 0)
+	 {
+		 //existe uma carta proibida
+		 ImageView imageViewCartaProibida;
+		 TextView textViewCartaProibida;
+		 if(this.qualCartaEstaProibida == 1)
+		 {
+			 imageViewCartaProibida = (ImageView) findViewById(R.id.karuta1_imageview);
+			 textViewCartaProibida = (TextView) findViewById(R.id.texto_karuta1);
+		 }
+		 else if(this.qualCartaEstaProibida == 2)
+		 {
+			 imageViewCartaProibida = (ImageView) findViewById(R.id.karuta2_imageview);
+			 textViewCartaProibida = (TextView) findViewById(R.id.texto_karuta2);
+		 }
+		 else if(this.qualCartaEstaProibida == 3)
+		 {
+			 imageViewCartaProibida = (ImageView) findViewById(R.id.karuta3_imageview);
+			 textViewCartaProibida = (TextView) findViewById(R.id.texto_karuta3);
+		 }
+		 else if(this.qualCartaEstaProibida == 4)
+		 {
+			 imageViewCartaProibida = (ImageView) findViewById(R.id.karuta4_imageview);
+			 textViewCartaProibida = (TextView) findViewById(R.id.texto_karuta4);
+		 }
+		 else if(this.qualCartaEstaProibida == 5)
+		 {
+			 imageViewCartaProibida = (ImageView) findViewById(R.id.karuta5_imageview);
+			 textViewCartaProibida = (TextView) findViewById(R.id.texto_karuta5);
+		 }
+		 else if(this.qualCartaEstaProibida == 6)
+		 {
+			 imageViewCartaProibida = (ImageView) findViewById(R.id.karuta6_imageview);
+			 textViewCartaProibida = (TextView) findViewById(R.id.texto_karuta6);
+		 }
+		 else if(this.qualCartaEstaProibida == 7)
+		 {
+			 imageViewCartaProibida = (ImageView) findViewById(R.id.karuta7_imageview);
+			 textViewCartaProibida = (TextView) findViewById(R.id.texto_karuta7);
+		 }
+		 else
+		 {
+			 imageViewCartaProibida = (ImageView) findViewById(R.id.karuta8_imageview);
+			 textViewCartaProibida = (TextView) findViewById(R.id.texto_karuta8);
+		 }
+		 
+		 imageViewCartaProibida.setClickable(true);
+		 imageViewCartaProibida.setAlpha(255);
+		 imageViewCartaProibida.setImageResource(R.drawable.karutavazia);
+		 
+		 textViewCartaProibida.setVisibility(View.VISIBLE);
+		 this.qualCartaEstaProibida = 0;
+	 }
+ }
+ 
+ private void fazerCartasDouradasVoltaremAoNormal()
+ {
+	 if(this.quaisCartasEstaoDouradas.size() > 0)
+	 {
+		 for(int i = 0; i < this.quaisCartasEstaoDouradas.size(); i++)
+		 {
+			 int posicaoUmaCartaDourada = this.quaisCartasEstaoDouradas.get(i);
+			 
+			 ImageView imageViewCartaVoltaAoNormal;
+			 
+			 if(posicaoUmaCartaDourada == 1)
+			 {
+				 imageViewCartaVoltaAoNormal = (ImageView) findViewById(R.id.karuta1_imageview);
+			 }
+			 else if(posicaoUmaCartaDourada == 2)
+			 {
+				 imageViewCartaVoltaAoNormal = (ImageView) findViewById(R.id.karuta2_imageview);
+			 }
+			 else if(posicaoUmaCartaDourada == 3)
+			 {
+				 imageViewCartaVoltaAoNormal = (ImageView) findViewById(R.id.karuta3_imageview);
+			 }
+			 else if(posicaoUmaCartaDourada == 4)
+			 {
+				 imageViewCartaVoltaAoNormal = (ImageView) findViewById(R.id.karuta4_imageview);
+			 }
+			 else if(posicaoUmaCartaDourada == 5)
+			 {
+				 imageViewCartaVoltaAoNormal = (ImageView) findViewById(R.id.karuta5_imageview);
+			 }
+			 else if(posicaoUmaCartaDourada == 6)
+			 {
+				 imageViewCartaVoltaAoNormal = (ImageView) findViewById(R.id.karuta6_imageview);
+			 }
+			 else if(posicaoUmaCartaDourada == 7)
+			 {
+				 imageViewCartaVoltaAoNormal = (ImageView) findViewById(R.id.karuta7_imageview);
+			 }
+			 else
+			 {
+				 imageViewCartaVoltaAoNormal = (ImageView) findViewById(R.id.karuta8_imageview);
+			 }
+			 imageViewCartaVoltaAoNormal.setImageResource(R.drawable.karutavazia);
+		 }
+		 this.quaisCartasEstaoDouradas.clear();
+	 }
+ }
+ 
+ //o usuario usou o item das cartas douradas. 4 cartas ou menos ficarao com cor diferente
+ private void realizarProcedimentoFazerCartasFicaremDouradas()
+ {
+	 //primeiro, vamos pegar as posicoes de todas cartas cartas que ainda estao no jogo e a dica
+	 //essas posicoes sao referentes a linkedlist kanjisdascartasnatela
+	 LinkedList<KanjiTreinar> kanjisNaoSairamDoJogo = new LinkedList<KanjiTreinar>();
+	 for(int i = 0; i < this.kanjisDasCartasNaTela.size(); i++)
+	 {
+		 KanjiTreinar umKanjiCartaNaTela = this.kanjisDasCartasNaTela.get(i);
+		 
+		 if(this.ehMesmoKanji(umKanjiCartaNaTela,this.kanjiDaDica) == true)
+		 {
+			 //eh o kanji da dica
+			 kanjisNaoSairamDoJogo.add(umKanjiCartaNaTela);
+		 }
+		 else
+		 {
+			 boolean cartaJaSaiuDoJogo = false;
+			 for(int j = 0; j < this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.size(); j++)
+			 {
+				 KanjiTreinar umKanjiCartaJaVirouDica = 
+						 this.kanjisDasCartasNaTelaQueJaSeTornaramDicas.get(j);
+				 if(this.ehMesmoKanji(umKanjiCartaJaVirouDica, umKanjiCartaNaTela) == true)
+				 {
+					 cartaJaSaiuDoJogo = true;
+					 break;
+				 }
+			 }
+	         
+			 if(cartaJaSaiuDoJogo == false)
+			 {
+				 kanjisNaoSairamDoJogo.add(umKanjiCartaNaTela);
+			 }
+		 }
+	 }
+	 
+	 //agora dependendo de quantas posicoes foram encontradas, faremos algumas cartas serem douradas
+	 int quantasCartasDouradasDevemSerCriadas = 0;
+	 if(kanjisNaoSairamDoJogo.size() == 1)
+	 {
+		 quantasCartasDouradasDevemSerCriadas = 1;
+	 }
+	 else if(kanjisNaoSairamDoJogo.size() == 2)
+	 {
+		 quantasCartasDouradasDevemSerCriadas = 2;
+	 }
+	 else if(kanjisNaoSairamDoJogo.size() == 3)
+	 {
+		 quantasCartasDouradasDevemSerCriadas = 3;
+	 }
+	 else if(kanjisNaoSairamDoJogo.size() >= 4)
+	 {
+		 quantasCartasDouradasDevemSerCriadas = 4;
+	 }
+	 else
+	 {
+		 //nao vai acontecer essa situacao, mas para previnir...
+		 quantasCartasDouradasDevemSerCriadas = 0;
+	 }
+	 
+	 for(int k = 0; k < quantasCartasDouradasDevemSerCriadas; k++)
+	 {
+		 Random geraNumAleatorio = new Random();
+		 int posicaoKanji = geraNumAleatorio.nextInt(kanjisNaoSairamDoJogo.size());
+		 KanjiTreinar kanjiCartaVaiVirarDourada = kanjisNaoSairamDoJogo.remove(posicaoKanji);
+		 
+		 //agora vamos achar essa carta dourada e pinta-la!
+		 for(int l = 0; l < this.kanjisDasCartasNaTela.size(); l++)
+		 {
+			 KanjiTreinar umKanjiCartaNaTela = this.kanjisDasCartasNaTela.get(l);
+			 
+			 if(this.ehMesmoKanji(umKanjiCartaNaTela,kanjiCartaVaiVirarDourada) == true)
+			 {
+				 //achamos a carta que vai ser dourada
+				 ImageView imageViewCartaDourada;
+				 if(l == 0)
+				 {
+					 imageViewCartaDourada = (ImageView) findViewById(R.id.karuta1_imageview);
+					 this.quaisCartasEstaoDouradas.add(1);
+				 }
+				 else if(l == 1)
+				 {
+					 imageViewCartaDourada = (ImageView) findViewById(R.id.karuta2_imageview);
+					 this.quaisCartasEstaoDouradas.add(2);
+				 }
+				 else if(l == 2)
+				 {
+					 imageViewCartaDourada = (ImageView) findViewById(R.id.karuta3_imageview);
+					 this.quaisCartasEstaoDouradas.add(3);
+				 }
+				 else if(l == 3)
+				 {
+					 imageViewCartaDourada = (ImageView) findViewById(R.id.karuta4_imageview);
+					 this.quaisCartasEstaoDouradas.add(4);
+				 }
+				 else if(l == 4)
+				 {
+					 imageViewCartaDourada = (ImageView) findViewById(R.id.karuta5_imageview);
+					 this.quaisCartasEstaoDouradas.add(5);
+				 }
+				 else if(l == 5)
+				 {
+					 imageViewCartaDourada = (ImageView) findViewById(R.id.karuta6_imageview);
+					 this.quaisCartasEstaoDouradas.add(6);
+				 }
+				 else if(l == 6)
+				 {
+					 imageViewCartaDourada = (ImageView) findViewById(R.id.karuta7_imageview);
+					 this.quaisCartasEstaoDouradas.add(7);
+				 }
+				 else
+				 {
+					 imageViewCartaDourada = (ImageView) findViewById(R.id.karuta8_imageview);
+					 this.quaisCartasEstaoDouradas.add(8);
+				 }
+				 
+				 imageViewCartaDourada.setImageResource(R.drawable.karutavaziadourada);
+				 break;
+			 }
+		 } 
+	 }
+ }
+ 
  /*a mascote fala a frase por 4 segundos e depois volta a fala anterior*/
  private void mascoteFalaFrasePor4Segundos(String fraseFalarPor4Segundos, String fraseAnterior)
  {
@@ -4484,6 +4891,7 @@ private void solicitarPorKanjisPraTreino() {
  private void fazerImageViewVoltarACorNormal(ImageView imageView)
  {
 	 imageView.setColorFilter(null);
+	 imageView.setAlpha(255);
  }
  
  /*coloca o texto verticalmente numa carta*/
@@ -4500,5 +4908,7 @@ private void solicitarPorKanjisPraTreino() {
 	 
 	 textViewUmaCarta.setText(textoComBarrasN);
  }
+ 
+ 
  
 }
